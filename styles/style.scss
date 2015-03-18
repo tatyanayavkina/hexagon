@@ -1,0 +1,135 @@
+$color-body-back: rgb(239, 205, 247);
+$border-color: rgba(226, 0, 247, 0.5);
+$border: 1px solid $border-color;
+
+$statistic-width: 200px;
+$statistic-font: 18px Arial;
+
+$statistic-color-red: rgb(255, 87, 66);
+$statistic-color-blue: rgb(144, 140, 254);
+
+$winner-font: 60px Arial;
+
+$banner-color: rgb(229, 229, 229);
+
+body {
+  background-color: $color-body-back;
+}
+
+.canvas-wrapper{
+    width: 800px;
+    margin: 0 auto;
+}
+#stadium, #selected, #pearls{
+   position: absolute;
+   top     : 20px;
+}
+
+#stadium{
+  z-index: 1;
+}
+
+#selected{
+  z-index: 2;
+}
+
+#pearls{
+  z-index: 3;
+}
+
+#game-info {
+  position: absolute;
+  top     : 810px;
+  left    : 45%;
+  width   : $statistic-width;
+  padding : 10px;
+
+  border  : $border;
+
+  text-align: center;
+  font    : $statistic-font;
+
+  .current-player{
+      margin: 4px;
+  }
+
+  .wrapper{
+    margin: 4px;
+
+    .statistic {
+      display: inline-block;
+      width  : 50%;
+    }
+
+    .red{
+      background-color: $statistic-color-red;
+    }
+
+    .blue{
+      background-color: $statistic-color-blue;
+    }
+  }
+
+}
+
+
+
+a{
+    text-decoration: none;
+
+    color: darken($statistic-color-blue, 30%);
+
+    &:visited{
+        color: darken($statistic-color-blue, 30%);
+    }
+
+    &:hover{
+      color: darken($statistic-color-blue, 45%);
+    }
+}
+
+.winner-banner{
+    display : none;
+    position: absolute;
+    top     : 0;
+    left    : 0;
+    bottom  : 0;
+    right   : 0;
+
+    z-index : 10;
+
+    opacity: 0.8;
+
+    &-inner{
+        width : 500px;
+        height: 200px;
+        margin: 300px auto;
+
+        background-color: $banner-color;
+
+        font: $winner-font;
+        text-align: center;
+
+        #result{
+            padding: 0 50px;
+
+            .wrapper{
+                width: 100%;
+            }
+        }
+
+    }
+
+    .count {
+      display: inline-block;
+    }
+
+    .red{
+      background-color: darken($statistic-color-red, 30%);
+    }
+
+    .blue{
+      background-color: darken($statistic-color-blue, 30%);
+    }
+
+}

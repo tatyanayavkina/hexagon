@@ -1,0 +1,77 @@
+body {
+  background-color: #efcdf7; }
+
+.canvas-wrapper {
+  width: 800px;
+  margin: 0 auto; }
+
+#stadium, #selected, #pearls {
+  position: absolute;
+  top: 20px; }
+
+#stadium {
+  z-index: 1; }
+
+#selected {
+  z-index: 2; }
+
+#pearls {
+  z-index: 3; }
+
+#game-info {
+  position: absolute;
+  top: 810px;
+  left: 45%;
+  width: 200px;
+  padding: 10px;
+  border: 1px solid rgba(226, 0, 247, 0.5);
+  text-align: center;
+  font: 18px Arial; }
+  #game-info .current-player {
+    margin: 4px; }
+  #game-info .wrapper {
+    margin: 4px; }
+    #game-info .wrapper .statistic {
+      display: inline-block;
+      width: 50%; }
+    #game-info .wrapper .red {
+      background-color: #ff5742; }
+    #game-info .wrapper .blue {
+      background-color: #908cfe; }
+
+a {
+  text-decoration: none;
+  color: #0a02ef; }
+  a:visited {
+    color: #0a02ef; }
+  a:hover {
+    color: #0701a3; }
+
+.winner-banner {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+  opacity: 0.8; }
+  .winner-banner-inner {
+    width: 500px;
+    height: 200px;
+    margin: 300px auto;
+    background-color: #e5e5e5;
+    font: 60px Arial;
+    text-align: center; }
+    .winner-banner-inner #result {
+      padding: 0 50px; }
+      .winner-banner-inner #result .wrapper {
+        width: 100%; }
+  .winner-banner .count {
+    display: inline-block; }
+  .winner-banner .red {
+    background-color: #a81300; }
+  .winner-banner .blue {
+    background-color: #0a02ef; }
+
+/*# sourceMappingURL=style.css.map */
