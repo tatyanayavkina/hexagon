@@ -1,8 +1,9 @@
 'use strict';
 
-var Hexagon = function(initial, size, place){
+var Hexagon = function(initial, size, place, active){
    this.vertexes = [initial];
    this.place = place;
+   this.active = active;
    this.center = new Coordinates(initial.x + (Math.sqrt(3)/2)*size, initial.y + size/2);
    this.radius = (Math.sqrt(3)/2)*size - 10;
 

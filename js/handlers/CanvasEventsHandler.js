@@ -1,6 +1,6 @@
 'use strict';
 
-var MouseEventsHandler = function(object, callback){
+function CanvasEventsHandler (object, callback){
     object.onmousedown = getCoordinates;
 
     function getCoordinates(event){

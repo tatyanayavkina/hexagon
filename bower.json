@@ -1,0 +1,13 @@
+{
+  "name": "hexagon",
+  "version": "0.0.1",
+  "authors": [],
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "library"
+  ],
+  "dependencies": {
+    "page": "visionmedia/page.js#~1.6.1"
+  }
+}

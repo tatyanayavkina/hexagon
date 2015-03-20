@@ -47,7 +47,7 @@ a {
   a:hover {
     color: #0701a3; }
 
-.winner-banner {
+.banner {
   display: none;
   position: absolute;
   top: 0;
@@ -56,22 +56,22 @@ a {
   right: 0;
   z-index: 10;
   opacity: 0.8; }
-  .winner-banner-inner {
+  .banner-inner {
     width: 500px;
     height: 200px;
     margin: 300px auto;
     background-color: #e5e5e5;
     font: 60px Arial;
     text-align: center; }
-    .winner-banner-inner #result {
+    .banner-inner #result {
       padding: 0 50px; }
-      .winner-banner-inner #result .wrapper {
+      .banner-inner #result .wrapper {
         width: 100%; }
-  .winner-banner .count {
+  .banner .count {
     display: inline-block; }
-  .winner-banner .red {
+  .banner .red {
     background-color: #a81300; }
-  .winner-banner .blue {
+  .banner .blue {
     background-color: #0a02ef; }
 
 /*# sourceMappingURL=style.css.map */

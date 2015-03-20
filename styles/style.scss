@@ -8,7 +8,7 @@ $statistic-font: 18px Arial;
 $statistic-color-red: rgb(255, 87, 66);
 $statistic-color-blue: rgb(144, 140, 254);
 
-$winner-font: 60px Arial;
+$inner-font: 60px Arial;
 
 $banner-color: rgb(229, 229, 229);
 
@@ -88,7 +88,7 @@ a{
     }
 }
 
-.winner-banner{
+.banner{
     display : none;
     position: absolute;
     top     : 0;
@@ -107,7 +107,7 @@ a{
 
         background-color: $banner-color;
 
-        font: $winner-font;
+        font: $inner-font;
         text-align: center;
 
         #result{

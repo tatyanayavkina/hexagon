@@ -1,7 +1,7 @@
 'use strict';
 function HexagonFactory(){
     var startX = START_POINT.x, startY = START_POINT.y;
-    var hexagon, place;
+    var hexagon, place, active;
     var hexagonArray = [];
 
     for(var i = 0, row = HEXAGON_ROW_COUNT.length; i< row; i++){
@@ -16,7 +16,8 @@ function HexagonFactory(){
 
         for(var j = 0; j < HEXAGON_ROW_COUNT[i]; j++){
             place = new Coordinates(i, j + MATRIX_TRANSLATION[i]);
-            hexagon = new Hexagon(new Coordinates(startX + Math.sqrt(3)*j*SIZE, startY), SIZE, place);
+            active = ( j > 0 && j < HEXAGON_ROW_COUNT[i] - 1);
+            hexagon = new Hexagon(new Coordinates(startX + Math.sqrt(3)*j*SIZE, startY), SIZE, place, active);
             hexagonArray.push(hexagon);
         }
     }

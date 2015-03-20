@@ -1,10 +1,8 @@
 'use strict';
 
 var View = function(){
-
-    this.stadium = new Canvas(CANVAS_ELEMENTS.stadium, CANVAS_COLORS.stadium );
-    this.selected = new Canvas(CANVAS_ELEMENTS.selected);
-    this.pearls = new Canvas(CANVAS_ELEMENTS.pearls);
+    //this.selected = new Canvas(CANVAS_ELEMENTS.selected);
+    //this.pearls = new Canvas(CANVAS_ELEMENTS.pearls);
 
     this.initView = function(hexagons, pearls){
         this.stadium.clear();
@@ -15,17 +13,37 @@ var View = function(){
             this.stadium.drawHexagon(hexagons[i], true);
         }
 
+
         for(i = 0, count = pearls.length; i < count; i++){
             this.pearls.drawCircle(pearls[i]);
         }
+    };
 
+    this.initViewConstructor = function (hexagons){
+        this.stadium = new Canvas(CANVAS_ELEMENTS.stadium, CANVAS_COLORS.stadium );
+        this.drawHexagons(hexagons);
+    };
+
+    this.drawHexagons = function(hexagons){
+        this.stadium.clear();
+        for( var i = 0, count = hexagons.length; i < count; i++){
+            //если клетка активна - она закрашенная
+            if(hexagons[i].active){
+                this.stadium.drawHexagon(hexagons[i], true, true);
+            }
+            //если неактивна - то есть только граница
+            else{
+                this.stadium.drawHexagon(hexagons[i], true, false);
+            }
+
+        }
     };
 
     this.drawSelected = function(hexagons){
         this.selected.clear();
 
         for( var i = 0, count = hexagons.length; i < count; i++){
-            this.selected.drawHexagon(hexagons[i], false);
+            this.selected.drawHexagon(hexagons[i], false, true);
         }
     };
 

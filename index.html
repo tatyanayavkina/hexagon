@@ -6,22 +6,9 @@
     <title>Hexagon</title>
 </head>
 <body>
-    <div class="canvas-wrapper">
-        <canvas id="stadium" width="800" height="800" ></canvas>
-        <canvas id="selected" width="800" height="800"></canvas>
-        <canvas id="pearls" width="800" height="800"></canvas>
-    </div>
+    <div id="page"></div>
 
-    <div id="game-info"></div>
-
-    <div id="winner-banner" class="winner-banner">
-        <div class="winner-banner-inner">
-            <div>
-                <a href="">Новая игра</a>
-            </div>
-            <div id="result"></div>
-        </div>
-    </div>
+    <script type="text/javascript" src="library/page/page.js"></script>
 
     <script type="text/javascript" src="js/models/CoordinatesClass.js"></script>
     <script type="text/javascript" src="js/constants/constants.js"></script>
@@ -33,10 +20,13 @@
     <script type="text/javascript" src="js/factories/HexagonFactory.js"></script>
     <script type="text/javascript" src="js/factories/PearlsFactory.js"></script>
     <script type="text/javascript" src="js/models/ViewClass.js"></script>
-    <script type="text/javascript" src="js/handlers/MouseEventsHandler.js"></script>
+    <script type="text/javascript" src="js/handlers/CanvasEventsHandler.js"></script>
+    <script type="text/javascript" src="js/handlers/ButtonClickHandler.js"></script>
     <script type="text/javascript" src="js/models/LastStepClass.js"></script>
     <script type="text/javascript" src="js/models/MoveCellClass.js"></script>
     <script type="text/javascript" src="js/models/GameClass.js"></script>
+    <script type="text/javascript" src="js/page/PageConstructor.js"></script>
+    <script type="text/javascript" src="js/models/GameConstructorClass.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

@@ -33,7 +33,7 @@ Canvas.prototype.setGradientFillStyle = function(color, points){
 /*
 рисование шестиугольника
  */
-Canvas.prototype.drawHexagon = function(hexagon, stroken){
+Canvas.prototype.drawHexagon = function(hexagon, stroken, filled){
     var points = hexagon.vertexes;
     this.context.fillStyle = this.setGradientFillStyle(hexagon.color, points) || this.color;
 
@@ -49,7 +49,10 @@ Canvas.prototype.drawHexagon = function(hexagon, stroken){
     if(stroken){
         this.context.stroke();
     }
-    this.context.fill();
+
+    if(filled){
+        this.context.fill();
+    }
 };
 
 /*
