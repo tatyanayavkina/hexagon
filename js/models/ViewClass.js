@@ -4,21 +4,6 @@ var View = function(){
     //this.selected = new Canvas(CANVAS_ELEMENTS.selected);
     //this.pearls = new Canvas(CANVAS_ELEMENTS.pearls);
 
-    this.initView = function(hexagons, pearls){
-        this.stadium.clear();
-        this.selected.clear();
-        this.pearls.clear();
-
-        for( var i = 0, count = hexagons.length; i < count; i++){
-            this.stadium.drawHexagon(hexagons[i], true);
-        }
-
-
-        for(i = 0, count = pearls.length; i < count; i++){
-            this.pearls.drawCircle(pearls[i]);
-        }
-    };
-
     this.initViewConstructor = function (hexagons){
         this.stadium = new Canvas(CANVAS_ELEMENTS.stadium, CANVAS_COLORS.stadium );
         this.drawHexagons(hexagons);
@@ -39,6 +24,19 @@ var View = function(){
         }
     };
 
+    this.initViewPlayer = function(hexagons, pearls){
+        this.stadium = new Canvas(CANVAS_ELEMENTS.stadium, CANVAS_COLORS.stadium );
+        this.pearls = new Canvas(CANVAS_ELEMENTS.pearls);
+
+        for( var i = 0, count = hexagons.length; i < count; i++){
+            this.stadium.drawHexagon(hexagons[i], true, true);
+        }
+
+        for(i = 0, count = pearls.length; i < count; i++){
+            this.pearls.drawCircle(pearls[i]);
+        }
+    };
+
     this.drawSelected = function(hexagons){
         this.selected.clear();
 
@@ -48,7 +46,7 @@ var View = function(){
     };
 
     this.drawPearls = function(pearls){
-        this.selected.clear();
+        //this.selected.clear();
         this.pearls.clear();
 
         for( var i = 0, count = pearls.length; i < count; i++){

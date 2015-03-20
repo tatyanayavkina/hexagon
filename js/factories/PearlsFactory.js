@@ -1,15 +1,21 @@
 'use strict';
 
-function PearlsFactory (board){
-    var position, hexagon, pearl;
+function PearlsFactory (hexagons){
+    var index, hexagon, pearl, count;
+    hexagons = hexagons.slice();//копирование без ссылок
+
     var pearlArray = [];
        //create Red pearls
-    for( var key in START_POSITIONS){
-        for( var i = 0, count = START_POSITIONS[key].length; i < count; i++){
-            position = START_POSITIONS[key][i];
-            hexagon = board[position.x][position.y].hexagon;
+    for( var key in START_COUNT){
+        for( var i = 0; i < START_COUNT[key]; i++){
+            count = hexagons.length;
+            index = Math.floor(Math.random()* count);
+            hexagon = hexagons[index];
+
             pearl = new Pearl(hexagon.center, hexagon.radius, hexagon.place, COLOR[key]);
             pearlArray.push(pearl);
+
+            hexagons.slice(index, 1);
         }
     }
 

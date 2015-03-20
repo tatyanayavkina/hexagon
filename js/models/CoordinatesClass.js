@@ -9,7 +9,4 @@ var Coordinates = function(x,y){
     }
 };
 
-Coordinates.prototype.equal = function(point){
-    return (this.x == point.x) && (this.y == point.y);
-};
 

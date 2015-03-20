@@ -26,20 +26,14 @@ var MATRIX_TRANSLATION = [0,0,0,0,0,1,2,3,4];
 //цвета игроков-фишек
 var COLOR = {
     RED: ["rgb(255, 87, 66)", "rgb(191, 0, 50)"],
-    BLUE: ["rgb(144, 140, 254)", "rgb(0, 61, 193)"]
+    BLUE: ["rgb(144, 140, 254)", "rgb(0, 61, 193)"],
+    WHITE: ["rgb(255, 255, 255)", "rgb(207, 204, 196)"]
 };
 //стартовые позиции жемчужин на игровой доске
-var START_POSITIONS = {
-  RED:  [
-      new Coordinates(0,0),
-      new Coordinates(4,8),
-      new Coordinates(8,4)
-  ],
-  BLUE: [
-      new Coordinates(0,4),
-      new Coordinates(4,0),
-      new Coordinates(8,8)
-  ]
+var START_COUNT = {
+  RED: 3,
+  BLUE: 3,
+  WHITE: 3
 };
 
 //точкА, от которой рисуется самый первый шестиугольник

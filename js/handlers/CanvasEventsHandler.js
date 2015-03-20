@@ -1,7 +1,7 @@
 'use strict';
 
-function CanvasEventsHandler (object, callback){
-    object.onmousedown = getCoordinates;
+function CanvasEventsHandler (object, action, callback){
+    object[action] = getCoordinates;
 
     function getCoordinates(event){
         //здесь this - это объект над которым произошло действие
@@ -9,4 +9,4 @@ function CanvasEventsHandler (object, callback){
         var y = event.pageY - this.offsetTop;
         callback(new Coordinates(x,y));
     }
-};
+}

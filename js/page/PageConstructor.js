@@ -9,7 +9,7 @@ var PageConstructor = function(){
         html += '<div id="player-banner" class="banner">'+
                     '<div class="banner-inner">'+
                         '<div> Сейчас играют 2 игрока</div>' +
-                        '<div><a href="./players">Новая игра</a></div>' +
+                        '<div><a href="./constructPlayers">Новая игра</a></div>' +
                     '</div>' +
                 '</div>';
 

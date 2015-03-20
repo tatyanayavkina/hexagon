@@ -3,7 +3,7 @@
 var LastStep = function(player, moveType, place){
     this.player = player || COLOR.RED;
     this.type = moveType || MOVE_TYPES.move;
-    this.place = place || START_POSITIONS.RED[0];
+    this.place = place || START_COUNT.RED[0];
 
 };
 

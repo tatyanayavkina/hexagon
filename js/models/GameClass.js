@@ -5,7 +5,7 @@ var Game = function(){
     this.view = new View();
     this.hexagons = HexagonFactory();
 
-    this.init = function(){
+    this.initStadium = function(){
         var len;
         var x, y;
         // формируем игровую зону
@@ -36,8 +36,8 @@ var Game = function(){
         this.lastStep = new LastStep();
         this.currentPlayer = COLOR.BLUE;
         this.count = {
-            red: START_POSITIONS.RED.length,
-            blue: START_POSITIONS.BLUE.length
+            red: START_COUNT.RED.length,
+            blue: START_COUNT.BLUE.length
         };
 
         // рисуем
