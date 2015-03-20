@@ -1,7 +1,6 @@
 'use strict';
 
 var GameConstructor = function(view){
-    var draggingInterval;
     this.view = view;
 
     this.initStadium = function(){
@@ -30,9 +29,7 @@ var GameConstructor = function(view){
         this.pearls = PearlsFactory(this.activeHexagons);
         this.view.initViewPlayer(this.activeHexagons, this.pearls);
 
-        if(!draggingInterval){
-            //draggingInterval = setInterval(self.view.drawPearls(self.pearls), 20);
-        }
+        this.selected =  -1;
     };
 
     this.chooseActiveHexagons = function(){
@@ -49,7 +46,7 @@ var GameConstructor = function(view){
         for (var i = 0, count = this.pearls.length; i < count; i++) {
             if (this.pearls[i].containPoint(point)) {
                 this.selected = i;
-                this.initCenter = clone(this.pearls[i].center);
+                this.initCenter = new Coordinates(this.pearls[i].center.x, this.pearls[i].center.y);
                 break;
             }
         }
@@ -72,11 +69,10 @@ var GameConstructor = function(view){
             var inBoard = false;
             index = this.selected;
             for(var i = 0, count = this.activeHexagons.length; i < count; i++){
-                if(this.activeHexagons[i].containPoint(point)){
+                if(this.activeHexagons[i].containPoint(point) && this.activeHexagons[i].active){
                     this.pearls[index].center = new Coordinates(this.activeHexagons[i].center.x, this.activeHexagons[i].center.y);
                     this.pearls[index].place = new Coordinates(this.activeHexagons[i].place.x, this.activeHexagons[i].place.y);
                     inBoard = true;
-
                     break;
                 }
             }
@@ -84,9 +80,10 @@ var GameConstructor = function(view){
             if(!inBoard){
                 this.pearls[index].center = new Coordinates(this.initCenter.x, this.initCenter.y);
             }
+            this.view.drawPearls(this.pearls);
+
             this.selected = -1;
             this.initCenter = {};
-            this.view.drawPearls(this.pearls);
         }
     };
 
