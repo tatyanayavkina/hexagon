@@ -1,11 +1,11 @@
 'use strict';
 
-var Game = function(){
+var Game = function(view, hexagons){
     this.board = [];
-    this.view = new View();
-    this.hexagons = HexagonFactory();
+    this.view = view;
+    this.hexagons = hexagons;
 
-    this.initStadium = function(){
+    this.initStadium = function(pearls){
         var len;
         var x, y;
         // формируем игровую зону
@@ -24,8 +24,7 @@ var Game = function(){
             zone.hexagon = this.hexagons[i];
             this.board[x][y] = zone;
         }
-        // заполняем поле жемчужинами
-        var pearls = PearlsFactory(this.board);
+
         for(i = 0, len = pearls.length; i < len; i++){
             x = pearls[i].place.x;
             y = pearls[i].place.y;
@@ -36,12 +35,12 @@ var Game = function(){
         this.lastStep = new LastStep();
         this.currentPlayer = COLOR.BLUE;
         this.count = {
-            red: START_COUNT.RED.length,
-            blue: START_COUNT.BLUE.length
+            red: START_COUNT.RED,
+            blue: START_COUNT.BLUE
         };
 
         // рисуем
-        this.view.initView(this.hexagons, pearls);
+        this.view.initGame(this.hexagons, pearls);
 
         //показываем статистику
         this.view.insertStatistic(this.currentPlayer, this.count);

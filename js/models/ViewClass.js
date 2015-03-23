@@ -1,27 +1,10 @@
 'use strict';
 
 var View = function(){
-    //this.selected = new Canvas(CANVAS_ELEMENTS.selected);
-    //this.pearls = new Canvas(CANVAS_ELEMENTS.pearls);
 
     this.initViewConstructor = function (hexagons){
         this.stadium = new Canvas(CANVAS_ELEMENTS.stadium, CANVAS_COLORS.stadium );
         this.drawHexagons(hexagons);
-    };
-
-    this.drawHexagons = function(hexagons){
-        this.stadium.clear();
-        for( var i = 0, count = hexagons.length; i < count; i++){
-            //если клетка активна - она закрашенная
-            if(hexagons[i].active){
-                this.stadium.drawHexagon(hexagons[i], true, true);
-            }
-            //если неактивна - то есть только граница
-            else{
-                this.stadium.drawHexagon(hexagons[i], true, false);
-            }
-
-        }
     };
 
     this.initViewPlayer = function(hexagons, pearls){
@@ -37,6 +20,29 @@ var View = function(){
         }
     };
 
+    this.initGame = function(hexagons, pearls){
+        this.stadium = new Canvas(CANVAS_ELEMENTS.stadium, CANVAS_COLORS.stadium );
+        this.selected = new Canvas(CANVAS_ELEMENTS.selected);
+        this.pearls = new Canvas(CANVAS_ELEMENTS.pearls);
+
+        this.drawHexagons(hexagons);
+        this.drawPearls(pearls);
+    };
+
+    this.drawHexagons = function(hexagons){
+        this.stadium.clear();
+        for( var i = 0, count = hexagons.length; i < count; i++){
+            //если клетка активна - она закрашенная
+            if(hexagons[i].active){
+                this.stadium.drawHexagon(hexagons[i], true, true);
+            }
+            //если неактивна - то есть только граница
+            else{
+                this.stadium.drawHexagon(hexagons[i], true, false);
+            }
+        }
+    };
+
     this.drawSelected = function(hexagons){
         this.selected.clear();
 
@@ -46,7 +52,9 @@ var View = function(){
     };
 
     this.drawPearls = function(pearls){
-        //this.selected.clear();
+        if (this.selected){
+            this.selected.clear();
+        }
         this.pearls.clear();
 
         for( var i = 0, count = pearls.length; i < count; i++){

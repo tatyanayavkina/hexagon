@@ -56,5 +56,9 @@ function constructPlayers(){
 }
 
 function play(){
-
+    var playConstructor = pageConstructor.createPageGamePlay();
+    pageConstructor.insertPage(playConstructor);
+    var game = new Game(view, gameConstructor.activeHexagons);
+    game.initStadium(gameConstructor.pearls);
+    CanvasEventsHandler(view.pearls.canvas, 'onmousedown', game.process.bind(game));
 }
