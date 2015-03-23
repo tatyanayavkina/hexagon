@@ -22,6 +22,8 @@ function checkHash (){
                     break;
                 default:
                     constructZone();
+                    hashHistory = window.location.hash = '#constructor';
+
             }
         }
 
