@@ -32,33 +32,33 @@ function checkHash (){
 //объект, отвечающий за содержимое страницы
 var pageConstructor = new PageConstructor();
 // объект, отвечающий за работу с canvas
-var view = new View();
+var canvasView = new CanvasView();
 //объект, отвечающий за конструирование параметров игры
-var gameConstructor = new GameConstructor(view);
-//document.addEventListener('DOMContentLoaded', initStadium, false);
+var gameConstructor = new GameConstructor(canvasView);
 
 function constructZone(){
     var zoneConstructor = pageConstructor.createPageZoneConstructor();
     pageConstructor.insertPage(zoneConstructor);
     gameConstructor.initStadium();
 
-    CanvasEventsHandler(view.stadium.canvas, 'onmousedown',gameConstructor.reconstructHexagon.bind(gameConstructor));
-    ButtonClickHandler('playersCount');
+    CanvasEventsHandler(canvasView.stadium.canvas, 'onmousedown',gameConstructor.reconstructHexagon.bind(gameConstructor));
+    ButtonClickHandler(BUTTON_SELECT_PLAYERS);
+    RadioClickHandler(RADIO_PLAYERS_COUNT, gameConstructor.changePlayersCount.bind(gameConstructor));
 }
 
 function constructPlayers(){
     var playersConstructor = pageConstructor.createPagePlayersConstructor();
     pageConstructor.insertPage(playersConstructor);
     gameConstructor.initPearls();
-    CanvasEventsHandler(view.pearls.canvas, 'onmousedown',gameConstructor.downPearl.bind(gameConstructor));
-    CanvasEventsHandler(view.pearls.canvas, 'onmousemove',gameConstructor.movePearl.bind(gameConstructor));
-    CanvasEventsHandler(view.pearls.canvas, 'onmouseup',gameConstructor.upPearl.bind(gameConstructor));
+    CanvasEventsHandler(canvasView.pearls.canvas, 'onmousedown',gameConstructor.downPearl.bind(gameConstructor));
+    CanvasEventsHandler(canvasView.pearls.canvas, 'onmousemove',gameConstructor.movePearl.bind(gameConstructor));
+    CanvasEventsHandler(canvasView.pearls.canvas, 'onmouseup',gameConstructor.upPearl.bind(gameConstructor));
 }
 
 function play(){
     var playConstructor = pageConstructor.createPageGamePlay();
     pageConstructor.insertPage(playConstructor);
-    var game = new Game(view, gameConstructor.activeHexagons);
+    var game = new Game(canvasView, gameConstructor.activeHexagons);
     game.initStadium(gameConstructor.pearls);
-    CanvasEventsHandler(view.pearls.canvas, 'onmousedown', game.process.bind(game));
+    CanvasEventsHandler(canvasView.pearls.canvas, 'onmousedown', game.process.bind(game));
 }

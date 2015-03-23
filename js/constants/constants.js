@@ -1,4 +1,9 @@
 'use strict';
+// id-ки элементов
+var BUTTON_SELECT_PLAYERS = 'playersCount';
+var BANNER_SELECT_PLAYERS = 'player-banner';
+var RADIO_PLAYERS_COUNT = 'players';
+
 
 // настройки цветов для рисования
 var CANVAS_COLORS ={
@@ -32,8 +37,8 @@ var COLOR = {
 //стартовые позиции жемчужин на игровой доске
 var START_COUNT = {
   RED: 3,
-  BLUE: 3
-  //WHITE: 3
+  BLUE: 3,
+  WHITE: 3
 };
 
 //точкА, от которой рисуется самый первый шестиугольник

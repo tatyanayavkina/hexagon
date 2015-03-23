@@ -8,7 +8,11 @@ var PageConstructor = function(){
                 '</div>';
         html += '<div id="player-banner" class="banner">'+
                     '<div class="banner-inner">'+
-                        '<div> Сейчас играют 2 игрока</div>' +
+                        '<div>Выбрать количество игроков</div>' +
+                        '<div>' +
+                            '<input name="players" type="radio" value="2" checked>2'+
+                            '<input name="players" type="radio" value="3">3'+
+                        '</div>'+
                         '<div><a href="#constructPlayers">Расставить фишки</a></div>' +
                     '</div>' +
                 '</div>';

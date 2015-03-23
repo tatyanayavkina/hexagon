@@ -1,8 +1,8 @@
 'use strict';
 
-var Game = function(view, hexagons){
+var Game = function(canvasView, hexagons){
     this.board = [];
-    this.view = view;
+    this.canvasView = canvasView;
     this.hexagons = hexagons;
 
     this.initStadium = function(pearls){
@@ -40,10 +40,10 @@ var Game = function(view, hexagons){
         };
 
         // рисуем
-        this.view.initGame(this.hexagons, pearls);
+        this.canvasView.initGame(this.hexagons, pearls);
 
         //показываем статистику
-        this.view.insertStatistic(this.currentPlayer, this.count);
+        this.canvasView.insertStatistic(this.currentPlayer, this.count);
     };
 
     // возвращает количество пустых зон
@@ -183,13 +183,13 @@ var Game = function(view, hexagons){
         //ткнули на ту же фишку - нужно отменить выделение фишки
         if(this.lastStep.isSame(place)){
             this.lastStep = new LastStep(this.currentPlayer, MOVE_TYPES.unselected, place);
-            this.view.drawSelected([]);
+            this.canvasView.drawSelected([]);
             return;
         }
 
         this.lastStep = new LastStep(this.currentPlayer, MOVE_TYPES.selected, place);
         this.getAvailableCells(place);
-        this.view.drawSelected(this.availableHexagons);
+        this.canvasView.drawSelected(this.availableHexagons);
         this.clearHexagonColor();
     };
 
@@ -205,15 +205,15 @@ var Game = function(view, hexagons){
 
         this.reColorPearls(this.availableCells[place].affected);
         this.getPearls();
-        this.view.drawPearls(this.pearls);
+        this.canvasView.drawPearls(this.pearls);
         this.changePlayer();
 
         if(!this.countFreeCells() || !this.playerHasMoveCells()){
             this.whenPlayerHasNoMoves();
-            this.view.insertGameOver(this.count);
+            this.canvasView.insertGameOver(this.count);
         }
         else{
-            this.view.insertStatistic(this.currentPlayer, this.count);
+            this.canvasView.insertStatistic(this.currentPlayer, this.count);
         }
     };
 
@@ -289,6 +289,6 @@ var Game = function(view, hexagons){
             pearls.push(new Pearl(hexagons[i].center, hexagons[i].radius, hexagons[i].place, this.currentPlayer) );
         }
         // поочередная отрисовка жемчужин в произвольном порядке
-        this.view.drawPearlsTimeout(pearls);
+        this.canvasView.drawPearlsTimeout(pearls);
     }
 };

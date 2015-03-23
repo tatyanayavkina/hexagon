@@ -1,12 +1,14 @@
 'use strict';
 
 var GameConstructor = function(view){
-    this.view = view;
+    this.canvasView = view;
+    // по умолчанию 2 игрока
+    this.players = 2;
 
     // генерация игровых клеток, их отрисовка: активных и неактивных
     this.initStadium = function(){
         this.hexagons = HexagonFactory();
-        this.view.initViewConstructor(this.hexagons);
+        this.canvasView.initViewConstructor(this.hexagons);
     };
 
     //перерисовка при изменении активности игровых клеток
@@ -21,16 +23,20 @@ var GameConstructor = function(view){
         }
 
         if(repaint){
-            this.view.drawHexagons(this.hexagons);
+            this.canvasView.drawHexagons(this.hexagons);
         }
+    };
+
+    this.changePlayersCount = function(count){
+       this.players = count;
     };
 
     //генерация стартовых фишек и их произвольное расположение на игровой зоне
     this.initPearls = function(){
         var self = this;
         this.chooseActiveHexagons();
-        this.pearls = PearlsFactory(this.activeHexagons);
-        this.view.initViewPlayer(this.activeHexagons, this.pearls);
+        this.pearls = PearlsFactory(this.activeHexagons, this.players);
+        this.canvasView.initViewPlayer(this.activeHexagons, this.pearls);
 
         this.selected =  -1;
     };
@@ -65,7 +71,7 @@ var GameConstructor = function(view){
             index = this.selected;
             this.pearls[index].center.x = point.x;
             this.pearls[index].center.y = point.y;
-            this.view.drawPearls(this.pearls);
+            this.canvasView.drawPearls(this.pearls);
         }
     };
 
@@ -87,7 +93,7 @@ var GameConstructor = function(view){
             if(!inBoard){
                 this.pearls[index].center = new Coordinates(this.initCenter.x, this.initCenter.y);
             }
-            this.view.drawPearls(this.pearls);
+            this.canvasView.drawPearls(this.pearls);
 
             this.selected = -1;
             this.initCenter = {};

@@ -1,6 +1,6 @@
 'use strict';
 
-var View = function(){
+var CanvasView = function(){
 
     this.initViewConstructor = function (hexagons){
         this.stadium = new Canvas(CANVAS_ELEMENTS.stadium, CANVAS_COLORS.stadium );
