@@ -216,13 +216,23 @@ var Game = function(canvasView, hexagons, players){
         this.canvasView.drawPearls(this.pearls);
         this.changePlayer();
 
-        if(!this.countFreeCells() || !this.playerHasMoveCells()){
-            this.whenPlayerHasNoMoves();
+        this.postMoveSelected();
+    };
+
+    // пост обработка хода жемчужины
+    this.postMoveSelected = function(){
+        // нет свободных клеток
+        if(!this.countFreeCells()){
             this.canvasView.insertGameOver(this.count);
+            return;
         }
-        else{
-            this.canvasView.insertStatistic(this.currentPlayer.color, this.count);
+        // нет ходов у текущего игрока
+        if(!this.playerHasMoveCells()){
+            this.whenPlayerHasNoMoves();
+            return;
         }
+        // игра продолжается
+        this.canvasView.insertStatistic(this.currentPlayer.color, this.count);
     };
 
     // переход хода
@@ -256,11 +266,18 @@ var Game = function(canvasView, hexagons, players){
 
     // выполняется, если у игрока нет ходов, а свободные клетки еще есть
     this.whenPlayerHasNoMoves = function(){
-        if(this.countFreeCells()){
+            var index = this.players.indexOf(this.currentPlayer);
             this.changePlayer();
+            //если сейчас больше 2-х игроков, то игрок, у которого нет ходов, удаляется из списка
+            if(this.players.length > 2){
+                this.players.splice(index, 1);
+                this.postMoveSelected();
+                return;
+            }
             this.addPearlsCountToPlayer();
             this.timeoutDraw();
-        }
+
+            this.canvasView.insertGameOver(this.count);
     };
 
     //добавляет очки текущему игроку (очки - количество пустых клеток на поле)

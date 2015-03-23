@@ -68,6 +68,8 @@ a {
       padding: 0 50px; }
       .banner-inner #result .wrapper {
         width: 100%; }
+        .banner-inner #result .wrapper .statistic {
+          display: inline-block; }
   .banner .count {
     display: inline-block; }
   .banner .red {
