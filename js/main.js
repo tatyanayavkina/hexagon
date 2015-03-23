@@ -1,10 +1,20 @@
 'use strict';
 
-page('/', page.redirect('/constructor'));
-page('/constructor', constructZone);
-page('/constructPlayers', constructPlayers);
-//page('game', game);
-page();
+document.addEventListener('DOMContentLoaded', onLoad, false);
+
+function onLoad(){
+    var path = window.location.pathname;
+    switch (path){
+        case '/constructor':
+            constructZone();
+            break;
+        case '/constructPlayers':
+            constructPlayers();
+            break;
+        default:
+            window.location.pathname = '/constructor';
+    }
+}
 
 //объект, отвечающий за содержимое страницы
 var pageConstructor = new PageConstructor();

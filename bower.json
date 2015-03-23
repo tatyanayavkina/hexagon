@@ -8,6 +8,6 @@
     "library"
   ],
   "dependencies": {
-    "page": "visionmedia/page.js#~1.6.1"
+
   }
 }
