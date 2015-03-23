@@ -15,7 +15,7 @@ function PearlsFactory (hexagons){
             pearl = new Pearl(hexagon.center, hexagon.radius, hexagon.place, COLOR[key]);
             pearlArray.push(pearl);
 
-            hexagons.slice(index, 1);
+            hexagons.splice(index, 1);
         }
     }
 

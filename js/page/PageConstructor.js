@@ -9,7 +9,7 @@ var PageConstructor = function(){
         html += '<div id="player-banner" class="banner">'+
                     '<div class="banner-inner">'+
                         '<div> Сейчас играют 2 игрока</div>' +
-                        '<div><a href="./constructPlayers">Новая игра</a></div>' +
+                        '<div><a href="#constructPlayers">Расставить фишки</a></div>' +
                     '</div>' +
                 '</div>';
 
@@ -17,7 +17,7 @@ var PageConstructor = function(){
     };
 
     this.createPagePlayersConstructor = function(){
-        var html = '<h1>Расстановка фишек</h1>';
+        var html = '<h1>Расстановка фишек</h1><div><a href="#game"><button>Начать игру</button></a></div>';
         html += '<div class="canvas-wrapper">' +
                     '<canvas id="stadium" width="980" height="800" ></canvas>' +
                     '<canvas id="pearls" width="980" height="800"></canvas>' +

@@ -1,20 +1,33 @@
 'use strict';
 
-document.addEventListener('DOMContentLoaded', onLoad, false);
+document.addEventListener('DOMContentLoaded', checkHash, false);
 
-function onLoad(){
-    var path = window.location.pathname;
-    switch (path){
-        case '/constructor':
-            constructZone();
-            break;
-        case '/constructPlayers':
-            constructPlayers();
-            break;
-        default:
-            window.location.pathname = '/constructor';
-    }
+var hashHistory;
+
+function checkHash (){
+    setInterval (function(){
+        var hash = window.location.hash;
+        if(hash != hashHistory){
+            // запоминаем hash, что обновляться только при изменении hash-а
+            hashHistory = hash;
+            switch (hash){
+                case '#constructor':
+                    constructZone();
+                    break;
+                case '#constructPlayers':
+                    constructPlayers();
+                    break;
+                case '#game':
+                    play();
+                    break;
+                default:
+                    constructZone();
+            }
+        }
+
+    }, 1000);
 }
+
 
 //объект, отвечающий за содержимое страницы
 var pageConstructor = new PageConstructor();
@@ -40,4 +53,8 @@ function constructPlayers(){
     CanvasEventsHandler(view.pearls.canvas, 'onmousedown',gameConstructor.downPearl.bind(gameConstructor));
     CanvasEventsHandler(view.pearls.canvas, 'onmousemove',gameConstructor.movePearl.bind(gameConstructor));
     CanvasEventsHandler(view.pearls.canvas, 'onmouseup',gameConstructor.upPearl.bind(gameConstructor));
+}
+
+function play(){
+
 }
