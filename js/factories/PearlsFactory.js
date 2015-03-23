@@ -5,22 +5,18 @@ function PearlsFactory (hexagons, players){
     hexagons = hexagons.slice();//копирование без ссылок
 
     var pearlArray = [];
-    var playersCount = 0;
 
-    for( var key in START_COUNT){
-        playersCount ++;
-        if (playersCount <= players){
-            for( var i = 0; i < START_COUNT[key]; i++){
+    for(var i = 0; i < players; i++){
+            for( var j = 0; j < PLAYERS_CONFIG[i].count; j++){
                 count = hexagons.length;
                 index = Math.floor(Math.random()* count);
                 hexagon = hexagons[index];
 
-                pearl = new Pearl(hexagon.center, hexagon.radius, hexagon.place, COLOR[key]);
+                pearl = new Pearl(hexagon.center, hexagon.radius, hexagon.place, PLAYERS_CONFIG[i].color);
                 pearlArray.push(pearl);
 
                 hexagons.splice(index, 1);
             }
-        }
     }
 
     return pearlArray;

@@ -76,12 +76,15 @@ var CanvasView = function(){
     };
 
     this.buildStatistic = function(player, count){
+        var width = 100/Object.keys(count).length;
         var html = '<div class="current-player" style="background-color: '+ player[0] +'">Сейчас ходят</div>';
 
-        html += '<div class="wrapper">'+
-                    '<div class="statistic red">' + count.red + '</div>' +
-                    '<div class="statistic blue">' + count.blue + '</div>' +
-                '</div>';
+        html += '<div class="wrapper">';
+        for(var key in count){
+            html += '<div class="statistic ' + key + '" style="width:'+ width + '%;">' + count[key] + '</div>'
+        }
+
+        html += '</div>';
         html += '<div class="new-game">'+
                     '<a href="">Новая игра</a>'+
                 '</div>';
@@ -90,12 +93,15 @@ var CanvasView = function(){
     };
 
     this.buildGameOver = function(count){
-        var widthRed = 100*count.red/(count.red + count.blue);
-        var widthBlue = 100 - widthRed;
-        return  '<div class="wrapper">'+
-                    '<div class="count red" style="width:'+ widthRed +'%;" >' + count.red + '</div>' +
-                    '<div class="count blue" style="width:'+ widthBlue +'%;" >' + count.blue + '</div>' +
-                '</div>';
+        var width = 100/Object.keys(count).length;
+        var html = '<div class="wrapper">';
+
+        for(var key in count){
+            html += '<div class="statistic ' + key + '" style="width:'+ width + '%;">' + count[key] + '</div>'
+        }
+        html += '</div>';
+
+        return  html;
     };
 
     this.insertStatistic = function(player, count){

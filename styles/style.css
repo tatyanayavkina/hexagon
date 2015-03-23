@@ -32,12 +32,13 @@ body {
   #game-info .wrapper {
     margin: 4px; }
     #game-info .wrapper .statistic {
-      display: inline-block;
-      width: 50%; }
+      display: inline-block; }
     #game-info .wrapper .red {
       background-color: #ff5742; }
     #game-info .wrapper .blue {
       background-color: #908cfe; }
+    #game-info .wrapper .white {
+      background-color: #cfccc4; }
 
 a {
   text-decoration: none;

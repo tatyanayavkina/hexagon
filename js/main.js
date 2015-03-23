@@ -60,7 +60,7 @@ function constructPlayers(){
 function play(){
     var playConstructor = pageConstructor.createPageGamePlay();
     pageConstructor.insertPage(playConstructor);
-    var game = new Game(canvasView, gameConstructor.activeHexagons);
+    var game = new Game(canvasView, gameConstructor.activeHexagons, gameConstructor.players);
     game.initStadium(gameConstructor.pearls);
     CanvasEventsHandler(canvasView.pearls.canvas, 'onmousedown', game.process.bind(game));
 }

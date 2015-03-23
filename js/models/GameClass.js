@@ -1,9 +1,10 @@
 'use strict';
 
-var Game = function(canvasView, hexagons){
+var Game = function(canvasView, hexagons, players){
     this.board = [];
     this.canvasView = canvasView;
     this.hexagons = hexagons;
+    this.players = PLAYERS_CONFIG.slice(0, players);
 
     this.initStadium = function(pearls){
         var len;
@@ -33,17 +34,17 @@ var Game = function(canvasView, hexagons){
 
         //записываем последний ход: ходили красные, следующий ход за синими
         this.lastStep = new LastStep();
-        this.currentPlayer = COLOR.BLUE;
-        this.count = {
-            red: START_COUNT.RED,
-            blue: START_COUNT.BLUE
-        };
-
+        this.currentPlayer = this.players[1];
+        // формируем первоначальное количество фишек
+        this.count = {};
+        for(i = 0, len = this.players.length; i < len; i++){
+            this.count[this.players[i].description] = this.players[i].count;
+        }
         // рисуем
         this.canvasView.initGame(this.hexagons, pearls);
 
         //показываем статистику
-        this.canvasView.insertStatistic(this.currentPlayer, this.count);
+        this.canvasView.insertStatistic(this.currentPlayer.color, this.count);
     };
 
     // возвращает количество пустых зон
@@ -70,7 +71,7 @@ var Game = function(canvasView, hexagons){
        var x = place.x, y = place.y;
        var newStep;
        // если это выбор фишки для перемещения
-       if(this.board[x][y].pearl && this.board[x][y].pearl.color == this.currentPlayer){
+       if(this.board[x][y].pearl && this.board[x][y].pearl.color == this.currentPlayer.color){
             this.selectPearl(place);
        }
 
@@ -100,13 +101,20 @@ var Game = function(canvasView, hexagons){
     // пробегается по игровой доске и находит все жемчужины
     this.getPearls = function(){
         this.pearls = [];
-        this.count.red = 0; this.count.blue = 0;
+        for(var key in this.count){
+            this.count[key] = 0;
+        }
+
         for(var i = 0, row = this.board.length; i < row; i++){
             for (var j = 0, col =  this.board[i].length; j < col; j++){
                 if(this.board[i][j] && this.board[i][j].pearl){
                     this.pearls.push(this.board[i][j].pearl);
                     //считаем очки
-                    this.board[i][j].pearl.color == COLOR.RED ? this.count.red++ : this.count.blue++;
+                    for(var k = 0, playersCount = this.players.length; k < playersCount; k++){
+                        if(this.board[i][j].pearl.color == this.players[k].color){
+                            this.count[this.players[k].description] ++;
+                        }
+                    }
                 }
             }
         }
@@ -160,7 +168,7 @@ var Game = function(canvasView, hexagons){
             placeX = place.x + POSITIONS.copy.positions[i].x;
             placeY = place.y + POSITIONS.copy.positions[i].y;
 
-            if(this.inBoard(new Coordinates(placeX, placeY)) && this.board[placeX][placeY] && this.board[placeX][placeY].pearl && this.board[placeX][placeY].pearl.color != this.currentPlayer){
+            if(this.inBoard(new Coordinates(placeX, placeY)) && this.board[placeX][placeY] && this.board[placeX][placeY].pearl && this.board[placeX][placeY].pearl.color != this.currentPlayer.color){
                 affected.push(new Coordinates(placeX, placeY));
             }
         }
@@ -174,7 +182,7 @@ var Game = function(canvasView, hexagons){
 
         for(var i = 0, count = positions.length; i < count; i++){
             place = positions[i];
-            this.board[place.x][place.y].pearl.color = this.currentPlayer;
+            this.board[place.x][place.y].pearl.color = this.currentPlayer.color;
         }
     };
 
@@ -196,7 +204,7 @@ var Game = function(canvasView, hexagons){
     // совершение хода для выбранной жемчужины
     this.moveSelected = function(place){
         var hexagon = this.board[place.x][place.y].hexagon;
-        this.board[place.x][place.y].pearl = new Pearl(hexagon.center, hexagon.radius, hexagon.place, this.lastStep.player);
+        this.board[place.x][place.y].pearl = new Pearl(hexagon.center, hexagon.radius, hexagon.place, this.lastStep.player.color);
 
         if(this.availableCells[place].type == POSITIONS.jump.type){
             var deletedPlace = this.lastStep.place;
@@ -213,22 +221,19 @@ var Game = function(canvasView, hexagons){
             this.canvasView.insertGameOver(this.count);
         }
         else{
-            this.canvasView.insertStatistic(this.currentPlayer, this.count);
+            this.canvasView.insertStatistic(this.currentPlayer.color, this.count);
         }
     };
 
     // переход хода
     this.changePlayer = function(){
-        switch(this.currentPlayer){
-            case COLOR.RED:
-                this.currentPlayer = COLOR.BLUE;
-                break;
-            case COLOR.BLUE:
-                this.currentPlayer = COLOR.RED;
-                break;
-            default:
-                console.log('unexpected error');
+        // находим индекс следующего игрока в массиве
+        var index = this.players.indexOf(this.currentPlayer) + 1;
+        //если вышли за пределы, возвращаемся к началу
+        if(index == this.players.length){
+            index = 0;
         }
+        this.currentPlayer = this.players[index];
     };
 
     // проверка - у игрока есть возможность хода
@@ -236,7 +241,7 @@ var Game = function(canvasView, hexagons){
         var has = false;
 
         for( var i = 0, count = this.pearls.length; i < count; i++ ){
-           if(this.pearls[i].color == this.currentPlayer){
+           if(this.pearls[i].color == this.currentPlayer.color){
                this.getAvailableCells(this.pearls[i].place);
 
                if (Object.keys(this.availableCells).length > 0){
@@ -249,7 +254,7 @@ var Game = function(canvasView, hexagons){
         return has;
     };
 
-    // выполняется, если у игрока нет ходов, а свобоные клетки еще есть
+    // выполняется, если у игрока нет ходов, а свободные клетки еще есть
     this.whenPlayerHasNoMoves = function(){
         if(this.countFreeCells()){
             this.changePlayer();
@@ -260,16 +265,8 @@ var Game = function(canvasView, hexagons){
 
     //добавляет очки текущему игроку (очки - количество пустых клеток на поле)
     this.addPearlsCountToPlayer = function(){
-        switch(this.currentPlayer){
-            case COLOR.RED:
-                this.count.red += this.countFreeCells();
-                break;
-            case COLOR.BLUE:
-                this.count.blue += this.countFreeCells();
-                break;
-            default:
-                console.log('unexpected error');
-        }
+        var color = this.currentPlayer.description;
+        this.count[color] += this.countFreeCells();
     };
 
     // ищет пустые клетки и заполняет их жемчужинами текущего игрока
@@ -286,7 +283,7 @@ var Game = function(canvasView, hexagons){
         var pearls = [];
 
         for(i = 0; i < hexagons.length; i++){
-            pearls.push(new Pearl(hexagons[i].center, hexagons[i].radius, hexagons[i].place, this.currentPlayer) );
+            pearls.push(new Pearl(hexagons[i].center, hexagons[i].radius, hexagons[i].place, this.currentPlayer.color) );
         }
         // поочередная отрисовка жемчужин в произвольном порядке
         this.canvasView.drawPearlsTimeout(pearls);

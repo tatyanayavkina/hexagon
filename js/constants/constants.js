@@ -22,24 +22,26 @@ var CANVAS_ELEMENTS ={
 };
 
 // размер игрового поля
-var GAME_SIZE = 9;
+var GAME_SIZE = 11;
 //массив, показывающий, сколько шестиугольников в каждом ряду
 var HEXAGON_ROW_COUNT = [7,8,9,10,11,10,9,8,7];
 //сдвиг при добавлении шестиугольников в игровую доску
 var MATRIX_TRANSLATION = [0,0,0,0,0,1,2,3,4];
 
-//цвета игроков-фишек
-var COLOR = {
-    RED: ["rgb(255, 87, 66)", "rgb(191, 0, 50)"],
-    BLUE: ["rgb(144, 140, 254)", "rgb(0, 61, 193)"],
-    WHITE: ["rgb(255, 255, 255)", "rgb(207, 204, 196)"]
-};
-//стартовые позиции жемчужин на игровой доске
-var START_COUNT = {
-  RED: 3,
-  BLUE: 3,
-  WHITE: 3
-};
+var COLORS ={
+   RED  : 'red',
+   BLUE : 'blue',
+   WHITE: 'white'
+} ;
+//Информация о стартовом количестве фишек и их цвете
+var PLAYERS_CONFIG = [
+    // RED
+    {count: 3, color: ["rgb(255, 87, 66)", "rgb(191, 0, 50)"], description: COLORS.RED},
+    // BLUE
+    {count: 3, color: ["rgb(144, 140, 254)", "rgb(0, 61, 193)"], description: COLORS.BLUE},
+    //WHITE
+    {count: 3, color: ["rgb(207, 204, 196)", "rgb(255, 255, 255)"], description: COLORS.WHITE}
+];
 
 //точкА, от которой рисуется самый первый шестиугольник
 var START_POINT = new Coordinates(150, 0);
@@ -57,7 +59,6 @@ var POSITIONS = {
           new Coordinates(1, 0),
           new Coordinates(1, 1),
           new Coordinates(0, 1)
-
       ],
       color: ['rgb(3, 194, 63)', 'rgb(5, 173, 55)'],
       type: 1

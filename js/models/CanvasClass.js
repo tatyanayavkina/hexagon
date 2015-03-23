@@ -59,7 +59,6 @@ Canvas.prototype.drawHexagon = function(hexagon, stroken, filled){
 рисование круга с центром center и радиуса radius цвета color
 */
 Canvas.prototype.drawCircle = function(pearl){
-
   var gradient = this.context.createLinearGradient(pearl.center.x - pearl.radius, pearl.center.y - pearl.radius, pearl.center.x + pearl.radius, pearl.center.y + pearl.radius);
   gradient.addColorStop(0.4, pearl.color[0]);
   gradient.addColorStop(0.8, pearl.color[1]);

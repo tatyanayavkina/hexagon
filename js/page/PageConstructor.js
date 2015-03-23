@@ -39,7 +39,7 @@ var PageConstructor = function(){
 
         html += '<div id="game-info"></div>';
         html += '<div id="winner-banner" class="banner">' +
-                    '<div class="winner-banner-inner">' +
+                    '<div class="banner-inner">' +
                         '<div>' +
                             '<a href="./">Новая игра</a>' +
                         '</div>' +

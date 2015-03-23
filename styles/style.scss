@@ -7,6 +7,7 @@ $statistic-font: 18px Arial;
 
 $statistic-color-red: rgb(255, 87, 66);
 $statistic-color-blue: rgb(144, 140, 254);
+$statistic-color-white: rgb(207, 204, 196);
 
 $inner-font: 60px Arial;
 
@@ -58,7 +59,6 @@ body {
 
     .statistic {
       display: inline-block;
-      width  : 50%;
     }
 
     .red{
@@ -67,6 +67,9 @@ body {
 
     .blue{
       background-color: $statistic-color-blue;
+    }
+    .white{
+      background-color: $statistic-color-white;
     }
   }
 
