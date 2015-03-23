@@ -3,11 +3,13 @@
 var GameConstructor = function(view){
     this.view = view;
 
+    // генерация игровых клеток, их отрисовка: активных и неактивных
     this.initStadium = function(){
         this.hexagons = HexagonFactory();
         this.view.initViewConstructor(this.hexagons);
     };
 
+    //перерисовка при изменении активности игровых клеток
     this.reconstructHexagon = function(point){
         var repaint = false;
         for( var i = 0, count = this.hexagons.length; i < count; i++){
@@ -23,6 +25,7 @@ var GameConstructor = function(view){
         }
     };
 
+    //генерация стартовых фишек и их произвольное расположение на игровой зоне
     this.initPearls = function(){
         var self = this;
         this.chooseActiveHexagons();
@@ -32,6 +35,7 @@ var GameConstructor = function(view){
         this.selected =  -1;
     };
 
+    //выборка активных игровых клеток из всего множества клеток
     this.chooseActiveHexagons = function(){
         this.activeHexagons = [];
 
@@ -42,6 +46,7 @@ var GameConstructor = function(view){
         }
     };
 
+    // обработка нажатия клавиши мыши на фишку
     this.downPearl = function(point) {
         for (var i = 0, count = this.pearls.length; i < count; i++) {
             if (this.pearls[i].containPoint(point)) {
@@ -53,6 +58,7 @@ var GameConstructor = function(view){
 
     };
 
+    // обработка таскания фишки
     this.movePearl = function(point){
         var index;
         if(this.selected != -1){
@@ -63,13 +69,14 @@ var GameConstructor = function(view){
         }
     };
 
+    // обработка отпускания клавиши мыши при выбранной фишке
     this.upPearl = function(point){
         var index;
         if(this.selected != -1){
             var inBoard = false;
             index = this.selected;
             for(var i = 0, count = this.activeHexagons.length; i < count; i++){
-                if(this.activeHexagons[i].containPoint(point) && this.activeHexagons[i].active){
+                if(this.activeHexagons[i].containPoint(point) && !this.activeHexagons[i].containPearl(this.pearls)){
                     this.pearls[index].center = new Coordinates(this.activeHexagons[i].center.x, this.activeHexagons[i].center.y);
                     this.pearls[index].place = new Coordinates(this.activeHexagons[i].place.x, this.activeHexagons[i].place.y);
                     inBoard = true;
