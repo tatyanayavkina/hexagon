@@ -44,9 +44,9 @@ var PLAYERS_CONFIG = [
 ];
 
 //точкА, от которой рисуется самый первый шестиугольник
-var START_POINT = new Coordinates(150, 0);
+var START_POINT = new Coordinates(100, 0);
 // размер стороны шестиугольника
-var SIZE = 50;
+var SIZE = 35;
 
 var POSITIONS = {
   copy:{

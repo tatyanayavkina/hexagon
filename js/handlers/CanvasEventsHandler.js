@@ -5,8 +5,8 @@ function CanvasEventsHandler (object, action, callback){
 
     function getCoordinates(event){
         //здесь this - это объект над которым произошло действие
-        var x = event.pageX - this.offsetLeft;
-        var y = event.pageY - this.offsetTop;
+        var x = event.pageX - this.getBoundingClientRect().left;
+        var y = event.pageY - this.getBoundingClientRect().top;
         callback(new Coordinates(x,y));
     }
 }

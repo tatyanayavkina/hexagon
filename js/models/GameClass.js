@@ -3,6 +3,7 @@
 var Game = function(canvasView, hexagons, players){
     this.board = [];
     this.canvasView = canvasView;
+    this.view = new View();
     this.hexagons = hexagons;
     this.players = PLAYERS_CONFIG.slice(0, players);
 
@@ -44,7 +45,7 @@ var Game = function(canvasView, hexagons, players){
         this.canvasView.initGame(this.hexagons, pearls);
 
         //показываем статистику
-        this.canvasView.insertStatistic(this.currentPlayer.color, this.count);
+        this.view.insertStatistic(this.currentPlayer.color, this.count);
     };
 
     // возвращает количество пустых зон
@@ -232,7 +233,7 @@ var Game = function(canvasView, hexagons, players){
             return;
         }
         // игра продолжается
-        this.canvasView.insertStatistic(this.currentPlayer.color, this.count);
+        this.view.insertStatistic(this.currentPlayer.color, this.count);
     };
 
     // переход хода
@@ -277,7 +278,7 @@ var Game = function(canvasView, hexagons, players){
             this.addPearlsCountToPlayer();
             this.timeoutDraw();
 
-            this.canvasView.insertGameOver(this.count);
+            this.view.insertGameOver(this.count);
     };
 
     //добавляет очки текущему игроку (очки - количество пустых клеток на поле)

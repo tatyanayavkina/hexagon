@@ -44,7 +44,6 @@ function constructZone(){
     gameConstructor.initStadium();
 
     CanvasEventsHandler(canvasView.stadium.canvas, 'onmousedown',gameConstructor.reconstructHexagon.bind(gameConstructor));
-    ButtonClickHandler(BUTTON_SELECT_PLAYERS);
     RadioClickHandler(RADIO_PLAYERS_COUNT, gameConstructor.changePlayersCount.bind(gameConstructor));
 }
 

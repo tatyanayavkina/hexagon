@@ -1,13 +1,8 @@
 body {
-  background-color: #efcdf7; }
-
-.canvas-wrapper {
-  width: 800px;
-  margin: 0 auto; }
+  background: linear-gradient(to right, #efcdf7, #d375e9); }
 
 #stadium, #selected, #pearls {
-  position: absolute;
-  top: 20px; }
+  position: absolute; }
 
 #stadium {
   z-index: 1; }
@@ -18,63 +13,110 @@ body {
 #pearls {
   z-index: 3; }
 
-#game-info {
+.title {
+  width: 100%;
+  margin-bottom: 40px;
+  font: 60px Arial;
+  color: rgba(39, 0, 43, 0.5); }
+  .title-inner {
+    max-width: 300px;
+    margin: 5px auto; }
+
+.game-table {
+  display: table;
+  width: 100%; }
+  .game-table-canvas, .game-table-info {
+    display: table-cell; }
+  .game-table-canvas {
+    width: 700px; }
+    .game-table-canvas .canvas-wrapper {
+      position: relative; }
+  .game-table-info {
+    width: 300px;
+    padding-top: 25px;
+    font: 18px Arial; }
+    .game-table-info-title {
+      padding: 10px 0;
+      font: 24px Arial;
+      font-weight: bold;
+      color: rgba(39, 0, 43, 0.5); }
+    .game-table-info-radio {
+      padding: 10px 0; }
+      .game-table-info-radio .radio {
+        padding-left: 5px; }
+        .game-table-info-radio .radio-label {
+          margin-left: 5px;
+          margin-right: 15px; }
+
+.button-a-wrapper {
+  margin-top: 24px; }
+
+.fixed {
   position: absolute;
-  top: 810px;
-  left: 45%;
-  width: 200px;
-  padding: 10px;
-  border: 1px solid rgba(226, 0, 247, 0.5);
+  top: 0;
+  right: 10px;
+  padding: 5px 0;
   text-align: center;
   font: 18px Arial; }
-  #game-info .current-player {
-    margin: 4px; }
+
+.button-a {
+  padding: 5px;
+  border: 1px solid rgba(226, 0, 247, 0.5);
+  border-radius: 4px;
+  background: linear-gradient(to left, #efcdf7, rgba(226, 0, 247, 0.5));
+  text-decoration: none; }
+  .button-a:hover {
+    background-color: rgba(39, 0, 43, 0.5); }
+
+#game-info {
+  max-width: 300px;
+  text-align: center; }
   #game-info .wrapper {
-    margin: 4px; }
-    #game-info .wrapper .statistic {
-      display: inline-block; }
+    width: 100%;
+    margin-top: 5px; }
     #game-info .wrapper .red {
       background-color: #ff5742; }
     #game-info .wrapper .blue {
       background-color: #908cfe; }
     #game-info .wrapper .white {
       background-color: #cfccc4; }
-
-a {
-  text-decoration: none;
-  color: #0a02ef; }
-  a:visited {
-    color: #0a02ef; }
-  a:hover {
-    color: #0701a3; }
+    #game-info .wrapper .statistic {
+      display: inline-block;
+      padding: 5px 0; }
+  #game-info .current-player {
+    width: 100%;
+    padding: 5px 0; }
 
 .banner {
-  display: none;
   position: absolute;
   top: 0;
-  left: 0;
-  bottom: 0;
   right: 0;
-  z-index: 10;
-  opacity: 0.8; }
+  bottom: 0;
+  left: 0;
+  display: none;
+  z-index: 10; }
   .banner-inner {
-    width: 500px;
-    height: 200px;
+    min-width: 300px;
+    max-width: 500px;
     margin: 300px auto;
+    min-height: 200px;
     background-color: #e5e5e5;
-    font: 60px Arial;
-    text-align: center; }
+    opacity: 0.8; }
     .banner-inner #result {
-      padding: 0 50px; }
+      width: 100%;
+      padding: 10px;
+      font: 24px Arial; }
       .banner-inner #result .wrapper {
-        width: 100%; }
+        width: 100%;
+        margin-top: 5px; }
+        .banner-inner #result .wrapper .red {
+          background-color: #ff5742; }
+        .banner-inner #result .wrapper .blue {
+          background-color: #908cfe; }
+        .banner-inner #result .wrapper .white {
+          background-color: #cfccc4; }
         .banner-inner #result .wrapper .statistic {
-          display: inline-block; }
-  .banner .count {
-    display: inline-block; }
-  .banner .red {
-    background-color: #a81300; }
-  .banner .blue {
-    background-color: #0a02ef; }
+          display: inline-block;
+          padding: 5px 0; }
 
 /*# sourceMappingURL=style.css.map */
