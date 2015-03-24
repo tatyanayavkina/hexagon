@@ -100,12 +100,13 @@ body {
     max-width: 500px;
     margin: 300px auto;
     min-height: 200px;
+    padding: 10px;
     background-color: #e5e5e5;
-    opacity: 0.8; }
+    opacity: 0.8;
+    text-align: center;
+    font: 24px Arial; }
     .banner-inner #result {
-      width: 100%;
-      padding: 10px;
-      font: 24px Arial; }
+      width: 100%; }
       .banner-inner #result .wrapper {
         width: 100%;
         margin-top: 5px; }

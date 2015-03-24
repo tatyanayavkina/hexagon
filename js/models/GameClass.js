@@ -224,7 +224,7 @@ var Game = function(canvasView, hexagons, players){
     this.postMoveSelected = function(){
         // нет свободных клеток
         if(!this.countFreeCells()){
-            this.canvasView.insertGameOver(this.count);
+            this.view.insertGameOver(this.count);
             return;
         }
         // нет ходов у текущего игрока
