@@ -48,6 +48,8 @@ var START_POINT = new Coordinates(100, 0);
 // размер стороны шестиугольника
 var SIZE = 35;
 
+var ANGLES = [0, Math.PI/6, Math.PI/3, Math.PI/2, 2*Math.PI/3, 5*Math.PI/6, Math.PI, 7*Math.PI/6, 4*Math.PI/3, 3*Math.PI/2, 5*Math.PI/3, 11*Math.PI/6, 2*Math.PI];
+
 var POSITIONS = {
   copy:{
       // позиции, на которые можно размножиться

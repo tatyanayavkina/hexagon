@@ -180,10 +180,12 @@ var Game = function(canvasView, hexagons, players){
     //перекрашивание жемчужин
     this.reColorPearls = function(positions){
         var place;
+        this.reColored = [];
 
         for(var i = 0, count = positions.length; i < count; i++){
             place = positions[i];
             this.board[place.x][place.y].pearl.color = this.currentPlayer.color;
+            this.reColored.push(this.board[place.x][place.y].pearl);
         }
     };
 
@@ -204,19 +206,26 @@ var Game = function(canvasView, hexagons, players){
 
     // совершение хода для выбранной жемчужины
     this.moveSelected = function(place){
+        var deleted;
         var hexagon = this.board[place.x][place.y].hexagon;
         this.board[place.x][place.y].pearl = new Pearl(hexagon.center, hexagon.radius, hexagon.place, this.lastStep.player.color);
 
         if(this.availableCells[place].type == POSITIONS.jump.type){
+            // находим позицию удаляемой жемчужины
             var deletedPlace = this.lastStep.place;
+            // запоминаем координаты ее контейнера
+            this.board[deletedPlace.x][deletedPlace.y].pearl.getRectangle();
+            // клонируем жемчужину
+            deleted = clone(this.board[deletedPlace.x][deletedPlace.y].pearl);
+            // удаляем ее из списка
             delete this.board[deletedPlace.x][deletedPlace.y].pearl;
         }
-
+        // перекрашиваем затронутые жемчужины
         this.reColorPearls(this.availableCells[place].affected);
-        this.getPearls();
-        this.canvasView.drawPearls(this.pearls);
+        // рисуем изменения
+        this.canvasView.drawStep(this.board[place.x][place.y].pearl, this.reColored, deleted);
         this.changePlayer();
-
+        this.getPearls();
         this.postMoveSelected();
     };
 

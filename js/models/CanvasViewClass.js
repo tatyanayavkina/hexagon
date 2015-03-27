@@ -52,13 +52,27 @@ var CanvasView = function(){
     };
 
     this.drawPearls = function(pearls){
-        if (this.selected){
-            this.selected.clear();
-        }
         this.pearls.clear();
 
         for( var i = 0, count = pearls.length; i < count; i++){
             this.pearls.drawCircle(pearls[i]);
+        }
+    };
+
+    this.drawStep = function(newP, recolorP, deletedP){
+        this.selected.clear();
+
+        // рисуем новую жемчужину
+        this.pearls.drawCircle(newP);
+        // перекрашиваем старые
+        if(recolorP.length > 0){
+            for(var i = 0, count = recolorP.length; i < count; i++){
+                this.pearls.drawSectorsTimeout(recolorP[i]);
+            }
+        }
+        // если нужно, убираем жемчужину
+        if (deletedP){
+            this.pearls.clear(deletedP.rectangle.left, deletedP.rectangle.right);
         }
     };
 
