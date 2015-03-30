@@ -1,9 +1,25 @@
 'use strict';
 // id-ки элементов
+var INFO = 'info';
 var BUTTON_SELECT_PLAYERS = 'playersCount';
 var BANNER_SELECT_PLAYERS = 'player-banner';
 var RADIO_PLAYERS_COUNT = 'players';
 
+// адреса для страниц
+var HASH_URI = {
+    zone    : '#construct-zone',
+    count   : '#construct-players-count',
+    pearls  : '#construct-players-position',
+    game    : '#play'
+};
+
+var CANVAS_WIDTH = 700;
+var CANVAS_HEIGHT = 550;
+
+//точка, от которой рисуется самый первый шестиугольник
+var START_POINT = new Coordinates(100, 0);
+// размер стороны шестиугольника
+var SIZE = 35;
 
 // настройки цветов для рисования
 var CANVAS_COLORS ={
@@ -43,10 +59,7 @@ var PLAYERS_CONFIG = [
     {count: 3, color: ["rgb(207, 204, 196)", "rgb(255, 255, 255)"], description: COLORS.WHITE}
 ];
 
-//точкА, от которой рисуется самый первый шестиугольник
-var START_POINT = new Coordinates(100, 0);
-// размер стороны шестиугольника
-var SIZE = 35;
+var PlAYERS_COUNT = PLAYERS_CONFIG.length;
 
 var ANGLES = [0, Math.PI/6, Math.PI/3, Math.PI/2, 2*Math.PI/3, 5*Math.PI/6, Math.PI, 7*Math.PI/6, 4*Math.PI/3, 3*Math.PI/2, 5*Math.PI/3, 11*Math.PI/6, 2*Math.PI];
 

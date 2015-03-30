@@ -1,36 +1,14 @@
 'use strict';
 
 var CanvasView = function(){
+    this.stadium = new Canvas(CANVAS_ELEMENTS.stadium, CANVAS_COLORS.stadium );
+    this.selected = new Canvas(CANVAS_ELEMENTS.selected);
+    this.pearls = new Canvas(CANVAS_ELEMENTS.pearls);
 
-    this.initViewConstructor = function (hexagons){
-        this.stadium = new Canvas(CANVAS_ELEMENTS.stadium, CANVAS_COLORS.stadium );
-        this.drawHexagons(hexagons);
-    };
 
-    this.initViewPlayer = function(hexagons, pearls){
-        this.stadium = new Canvas(CANVAS_ELEMENTS.stadium, CANVAS_COLORS.stadium );
-        this.pearls = new Canvas(CANVAS_ELEMENTS.pearls);
-
-        for( var i = 0, count = hexagons.length; i < count; i++){
-            this.stadium.drawHexagon(hexagons[i], true, true);
-        }
-
-        for(i = 0, count = pearls.length; i < count; i++){
-            this.pearls.drawCircle(pearls[i]);
-        }
-    };
-
-    this.initGame = function(hexagons, pearls){
-        this.stadium = new Canvas(CANVAS_ELEMENTS.stadium, CANVAS_COLORS.stadium );
-        this.selected = new Canvas(CANVAS_ELEMENTS.selected);
-        this.pearls = new Canvas(CANVAS_ELEMENTS.pearls);
-
-        this.drawHexagons(hexagons);
-        this.drawPearls(pearls);
-    };
-
-    this.drawHexagons = function(hexagons){
+    this.ShowHexagons = function(hexagons){
         this.stadium.clear();
+
         for( var i = 0, count = hexagons.length; i < count; i++){
             //если клетка активна - она закрашенная
             if(hexagons[i].active){
@@ -43,7 +21,7 @@ var CanvasView = function(){
         }
     };
 
-    this.drawSelected = function(hexagons){
+    this.ShowSelected = function(hexagons){
         this.selected.clear();
 
         for( var i = 0, count = hexagons.length; i < count; i++){
@@ -51,7 +29,7 @@ var CanvasView = function(){
         }
     };
 
-    this.drawPearls = function(pearls){
+    this.ShowPearls = function(pearls){
         this.pearls.clear();
 
         for( var i = 0, count = pearls.length; i < count; i++){
@@ -88,5 +66,7 @@ var CanvasView = function(){
         var self = this;
         setTimeout(function(){self.pearls.drawCircle(pearl)}, i*100);
     };
+
+
 
  };
