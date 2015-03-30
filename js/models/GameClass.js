@@ -206,17 +206,16 @@ var Game = function(canvasView, hexagons, players){
 
     // совершение хода для выбранной жемчужины
     this.moveSelected = function(place){
-        var deleted;
+        var deleted = null;
         var hexagon = this.board[place.x][place.y].hexagon;
         this.board[place.x][place.y].pearl = new Pearl(hexagon.center, hexagon.radius, hexagon.place, this.lastStep.player.color);
 
         if(this.availableCells[place].type == POSITIONS.jump.type){
             // находим позицию удаляемой жемчужины
             var deletedPlace = this.lastStep.place;
-            // запоминаем координаты ее контейнера
-            this.board[deletedPlace.x][deletedPlace.y].pearl.getRectangle();
-            // клонируем жемчужину
-            deleted = clone(this.board[deletedPlace.x][deletedPlace.y].pearl);
+            deleted = this.board[deletedPlace.x][deletedPlace.y].pearl;
+            deleted = new Pearl(deleted.center, deleted.radius, deleted.place, deleted.color);
+            deleted.getRectangle();
             // удаляем ее из списка
             delete this.board[deletedPlace.x][deletedPlace.y].pearl;
         }

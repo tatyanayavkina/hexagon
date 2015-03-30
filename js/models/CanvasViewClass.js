@@ -72,7 +72,7 @@ var CanvasView = function(){
         }
         // если нужно, убираем жемчужину
         if (deletedP){
-            this.pearls.clear(deletedP.rectangle.left, deletedP.rectangle.right);
+            this.pearls.clear(deletedP.rectangle.left, deletedP.rectangle.width, deletedP.rectangle.height);
         }
     };
 

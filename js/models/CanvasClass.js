@@ -13,11 +13,12 @@ var Canvas = function(id, colors){
 /*
 очищение канвы
 */
-Canvas.prototype.clear = function(start, end){
-    var left = start || new Coordinates(0,0);
-    var right = end || new Coordinates(this.canvas.width,this.canvas.height);
+Canvas.prototype.clear = function(start, width, height){
+    start = start || new Coordinates(0,0);
+    width = width || this.canvas.width;
+    height = height || this.canvas.height;
 
-    this.context.clearRect(left.x, left.y, right.x, right.y);
+    this.context.clearRect(start.x, start.y, width, height);
 };
 
 /* накладывает градиент, если задано */
