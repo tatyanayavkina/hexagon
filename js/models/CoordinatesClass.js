@@ -13,3 +13,8 @@ Coordinates.prototype.equalCopy = function(copy){
    return (this.x == copy.x && this.y == copy.y);
 };
 
+Coordinates.prototype.copyFrom = function(copy){
+  this.x = copy.x;
+  this.y = copy.y;
+};
+

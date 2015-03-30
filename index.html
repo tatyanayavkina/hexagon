@@ -13,8 +13,8 @@
         <div class="game-table-canvas">
             <div class="canvas-wrapper">
                 <canvas id="stadium" width="700" height="550" ></canvas>
-                <canvas id="selected" width="'+ CANVAS_WIDTH +'" height="'+ CANVAS_HEIGHT+'" ></canvas>
-                <canvas id="pearls" width="'+ CANVAS_WIDTH +'" height="'+ CANVAS_HEIGHT+'" ></canvas>
+                <canvas id="selected" width="700'" height="550" ></canvas>
+                <canvas id="pearls" width="700" height="550" ></canvas>
                 </div>
             </div>
             <div id="info" class="game-table-info">
@@ -40,14 +40,14 @@
     <script type="text/javascript" src="js/models/CanvasClass.js"></script>
     <script type="text/javascript" src="js/models/CanvasViewClass.js"></script>
     <script type="text/javascript" src="js/models/ViewClass.js"></script>
-    <script type="text/javascript" src="js/handlers/CanvasEventsHandler.js"></script>
-    <script type="text/javascript" src="js/handlers/RadioClickHandler.js"></script>
     <script type="text/javascript" src="js/models/LastStepClass.js"></script>
     <script type="text/javascript" src="js/models/MoveCellClass.js"></script>
-    <script type="text/javascript" src="js/models/GameClass.js"></script>
+    <script type="text/javascript" src="js/models/GameModel.js"></script>
     <script type="text/javascript" src="js/page/PageConstructor.js"></script>
-    <script type="text/javascript" src="js/models/GameConstructorClass.js"></script>
-
+    <script type="text/javascript" src="js/controllers/GameController.js"></script>
+    <script type="text/javascript" src="js/controllers/ZoneConstructor.js"></script>
+    <script type="text/javascript" src="js/controllers/PlayerCountConstructor.js"></script>
+    <script type="text/javascript" src="js/controllers/PearlsConstructor.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 </body>

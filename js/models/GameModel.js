@@ -4,6 +4,7 @@ var GameModel = function(){
     this.board = [];
     this.hexagons = [];
     this.pearls = [];
+    this.players = [];
 
     this.initHexagons = function(){
         var startX = START_POINT.x, startY = START_POINT.y;
@@ -33,13 +34,13 @@ var GameModel = function(){
         var  index, hexagon, pearl, count;
         var hexagons = this.hexagons.slice();//копирование без ссылок
 
-        for(var i = 0; i < players; i++){
-            for( var j = 0; j < PLAYERS_CONFIG[i].count; j++){
+        for(var i = 0, len = this.players.length; i < len; i++){
+            for( var j = 0; j < this.players[i].count; j++){
                 count = hexagons.length;
                 index = Math.floor(Math.random()* count);
                 hexagon = hexagons[index];
 
-                pearl = new Pearl(hexagon.center, hexagon.radius, hexagon.place, PLAYERS_CONFIG[i].color);
+                pearl = new Pearl(hexagon.center, hexagon.radius, hexagon.place, this.players[i].color);
                 this.pearls.push(pearl);
 
                 hexagons.splice(index, 1);
@@ -72,5 +73,29 @@ var GameModel = function(){
             y = this.pearls[i].place.y;
             this.board[x][y].pearl = this.pearls[i];
         }
+    };
+
+    this.reduceHexagons =function(){
+        var count = this.hexagons.length;
+
+        for(var i = count - 1; i >= 0; i--){
+            if( !this.hexagons[i].active){
+                this.hexagons.slice(i, 1);
+            }
+        }
+    };
+
+    this.findByHexagon = function(hexagon){
+        var place = hexagon.place;
+        var found = false;
+
+        for(var i = 0, count = this.pearls.length; i < count; i++){
+            if(this.pearls[i].place.equalCopy(place)){
+                found = true;
+                break;
+            }
+        }
+
+        return found;
     }
 };

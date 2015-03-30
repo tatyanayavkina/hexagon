@@ -42,7 +42,7 @@ var Application = function() {
         this.controller = new ZoneConstructor(this.view, this.model, this.pageConstructor);
     };
     this.createPlayerCounter = function() {
-        this.controller = new PlayerCounter(this.view, this.model, this.pageConstructor);
+        this.controller = new PlayerCounterConstructor(this.view, this.model, this.pageConstructor);
     };
     this.createPearlsConstructor = function() {
         this.controller = new PearlsConstructor(this.view, this.model, this.pageConstructor);

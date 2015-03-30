@@ -13,9 +13,6 @@ var HASH_URI = {
     game    : '#play'
 };
 
-var CANVAS_WIDTH = 700;
-var CANVAS_HEIGHT = 550;
-
 //точка, от которой рисуется самый первый шестиугольник
 var START_POINT = new Coordinates(100, 0);
 // размер стороны шестиугольника
@@ -35,6 +32,12 @@ var CANVAS_ELEMENTS ={
   stadium : 'stadium',
   selected: 'selected',
   pearls  : 'pearls'
+};
+
+var CANVAS_EVENTS = {
+  mousedown : 'onmousedown',
+  mousemove : 'onmousemove',
+  mouseup   : 'onmouseup'
 };
 
 // размер игрового поля

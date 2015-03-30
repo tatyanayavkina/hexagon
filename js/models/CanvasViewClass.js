@@ -6,7 +6,7 @@ var CanvasView = function(){
     this.pearls = new Canvas(CANVAS_ELEMENTS.pearls);
 
 
-    this.ShowHexagons = function(hexagons){
+    this.showHexagons = function(hexagons){
         this.stadium.clear();
 
         for( var i = 0, count = hexagons.length; i < count; i++){
@@ -21,7 +21,7 @@ var CanvasView = function(){
         }
     };
 
-    this.ShowSelected = function(hexagons){
+    this.showSelected = function(hexagons){
         this.selected.clear();
 
         for( var i = 0, count = hexagons.length; i < count; i++){
@@ -29,7 +29,7 @@ var CanvasView = function(){
         }
     };
 
-    this.ShowPearls = function(pearls){
+    this.showPearls = function(pearls){
         this.pearls.clear();
 
         for( var i = 0, count = pearls.length; i < count; i++){
@@ -37,20 +37,20 @@ var CanvasView = function(){
         }
     };
 
-    this.drawStep = function(newP, recolorP, deletedP){
+    this.drawStep = function(newPearl, recolorPearls, deletedPearl){
         this.selected.clear();
 
         // рисуем новую жемчужину
-        this.pearls.drawCircle(newP);
+        this.pearls.drawCircle(newPearl);
         // перекрашиваем старые
-        if(recolorP.length > 0){
-            for(var i = 0, count = recolorP.length; i < count; i++){
-                this.pearls.drawSectorsTimeout(recolorP[i]);
+        if(recolorPearls.length > 0){
+            for(var i = 0, count = recolorPearls.length; i < count; i++){
+                this.pearls.drawSectorsTimeout(recolorPearls[i]);
             }
         }
         // если нужно, убираем жемчужину
-        if (deletedP){
-            this.pearls.clear(deletedP.rectangle.left, deletedP.rectangle.width, deletedP.rectangle.height);
+        if (deletedPearl){
+            this.pearls.clear(deletedPearl.rectangle.left, deletedPearl.rectangle.width, deletedPearl.rectangle.height);
         }
     };
 
@@ -67,6 +67,25 @@ var CanvasView = function(){
         setTimeout(function(){self.pearls.drawCircle(pearl)}, i*100);
     };
 
+
+    this.setHandlerOnCanvas = function(eventType, handler){
+        this.pearls[eventType] = this.getCanvasCoordinates;
+    };
+
+    this.deleteHandlersOnCanvas = function(){
+        var event;
+        for(var key in CANVAS_EVENTS){
+            if(event = CANVAS_EVENTS[key] && this.pearls[event]){
+                this.pearls[event] = function(){};
+            }
+        }
+    };
+
+    this.getCanvasCoordinates = function(event, handler){
+        var x = event.pageX - this.getBoundingClientRect().left;
+        var y = event.pageY - this.getBoundingClientRect().top;
+        handler(new Coordinates(x,y));
+    }
 
 
  };
