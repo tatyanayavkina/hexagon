@@ -6,37 +6,19 @@ var GameController = function(view, model, pageConstructor) {
     this.model = model;
     this.pageConstructor = pageConstructor;
 
-    this.handlerHexagonClicked = function() {};
-    this.handlerPearlMoved = function() {};
-    this.handlerPearlClicked = function() {};
+    //this.handlerHexagonClicked = function() {};
+    //this.handlerPearlMoved = function() {};
+    //this.handlerPearlClicked = function() {};
 
-    this.ensureSharedObjectsInitialized = function (view, model, pageConstructor) {
-        if(Object.keys(view).length == 0){
-            this.view = new CanvasView();
-        }
-
-        if(Object.keys(model).length == 0){
-            this.model = new GameModel();
-        }
-
-        if(Object.keys(pageConstructor).length == 0){
-            this.pageConstructor = new PageConstructor();
-        }
-    };
-
-    this.ensureSharedObjectsInitialized(view, model, pageConstructor);
 
     /////////////////////////////////////////////////////////
-    this.setHandlerHexagonClicked = function(handler) {
-        this.handlerHexagonClicked = handler;
+
+    this.setHandlerOnCanvasClick = function(handler){
+        this.view.setHandlerOnCanvas(CANVAS_EVENTS.mousedown, handler.bind(this));
     };
 
-    this.setHandlerPearlMoved = function(handler) {
-        this.handlerPearlMoved = handler;
-    };
-
-    this.setHandlerPearlClicked = function(handler) {
-        this.handlerPearlClicked = handler;
+    this.deleteAllHandlersOnCanvas = function(){
+      this.view.deleteAllHandlersOnCanvas();
     };
 
 /////////////////////////////////////////////////////////

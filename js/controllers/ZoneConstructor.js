@@ -12,13 +12,22 @@ var ZoneConstructor = function(view, model, pageConstructor) {
         hexagon.active = !hexagon.active;
     };
 
+    this.handleCanvasClicked = function(point){
+        var hexagon = this.model.findHexagonByPoint(point);
+        if(hexagon){
+            this.handlerHexagonClicked(hexagon);
+            this.view.showHexagons(this.model.hexagons);
+        }
+    };
+
     this.process = function() {
         var page = this.pageConstructor.createPageZoneConstructor();
         this.insertPage(page);
 
         this.model.initHexagons();
         this.view.showHexagons(this.model.hexagons);
-        this.setHandlerHexagonClicked(this.handlerHexagonClicked);
+        this.deleteAllHandlersOnCanvas();
+        this.setHandlerOnCanvasClick(this.handleCanvasClicked);
     };
 
 

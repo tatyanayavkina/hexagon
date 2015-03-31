@@ -5,7 +5,6 @@ var CanvasView = function(){
     this.selected = new Canvas(CANVAS_ELEMENTS.selected);
     this.pearls = new Canvas(CANVAS_ELEMENTS.pearls);
 
-
     this.showHexagons = function(hexagons){
         this.stadium.clear();
 
@@ -69,23 +68,25 @@ var CanvasView = function(){
 
 
     this.setHandlerOnCanvas = function(eventType, handler){
-        this.pearls[eventType] = this.getCanvasCoordinates;
-    };
+        this.pearls.canvas[eventType] = getCoordinates;
 
-    this.deleteHandlersOnCanvas = function(){
-        var event;
-        for(var key in CANVAS_EVENTS){
-            if(event = CANVAS_EVENTS[key] && this.pearls[event]){
-                this.pearls[event] = function(){};
-            }
+        function getCoordinates(event){
+            var x = event.pageX - this.getBoundingClientRect().left;
+            var y = event.pageY - this.getBoundingClientRect().top;
+
+            handler(new Coordinates(x,y));
         }
     };
 
-    this.getCanvasCoordinates = function(event, handler){
-        var x = event.pageX - this.getBoundingClientRect().left;
-        var y = event.pageY - this.getBoundingClientRect().top;
-        handler(new Coordinates(x,y));
-    }
+    this.deleteAllHandlersOnCanvas = function(){
+        var eventType;
+        for(var key in CANVAS_EVENTS){
+            if (CANVAS_EVENTS[key]){
+                eventType = CANVAS_EVENTS[key];
+                this.pearls.canvas[eventType] = "";
+            }
+        }
 
+    };
 
  };

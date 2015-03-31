@@ -48,17 +48,3 @@ Hexagon.prototype.containPoint = function(point){
 
     return contain;
 };
-
-Hexagon.prototype.containPearl = function(pearls){
-    var contain = false;
-
-    for( var i = 0, count = pearls.length; i < count; i++){
-
-        if(pearls[i].place.equalCopy(this.place)){
-            contain = true;
-            break;
-        }
-    }
-
-    return contain;
-};

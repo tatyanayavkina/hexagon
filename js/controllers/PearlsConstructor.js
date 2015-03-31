@@ -31,9 +31,12 @@ var PearlsConstructor = function(view, model, pageConstructor) {
         var page = this.pageConstructor.createPagePlayersConstructor();
         this.insertPage(page);
 
-        this.view.showHexagons();
-        this.view.showPearls();
-        this.setHandlerPearlMoved(this.handlerPearlMoved);
+        this.model.initPearls();
+
+        this.view.showHexagons(this.model.hexagons);
+        this.view.showPearls(this.model.pearls);
+
+        this.deleteAllHandlersOnCanvas();
     };
 
 

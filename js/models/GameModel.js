@@ -4,7 +4,7 @@ var GameModel = function(){
     this.board = [];
     this.hexagons = [];
     this.pearls = [];
-    this.players = [];
+    this.players = PLAYERS_CONFIG.slice(0,2);
 
     this.initHexagons = function(){
         var startX = START_POINT.x, startY = START_POINT.y;
@@ -80,9 +80,21 @@ var GameModel = function(){
 
         for(var i = count - 1; i >= 0; i--){
             if( !this.hexagons[i].active){
-                this.hexagons.slice(i, 1);
+                this.hexagons.splice(i, 1);
             }
         }
+    };
+
+    this.findHexagonByPoint = function(point){
+        var hexagon = null;
+        for(var i = 0, count = this.hexagons.length; i < count; i++){
+            if (this.hexagons[i].containPoint(point)){
+                hexagon = this.hexagons[i];
+                break;
+            }
+        }
+
+        return hexagon;
     };
 
     this.findByHexagon = function(hexagon){

@@ -37,7 +37,8 @@ var CANVAS_ELEMENTS ={
 var CANVAS_EVENTS = {
   mousedown : 'onmousedown',
   mousemove : 'onmousemove',
-  mouseup   : 'onmouseup'
+  mouseup   : 'onmouseup',
+  mouseclick: 'onmouseclick'
 };
 
 // размер игрового поля

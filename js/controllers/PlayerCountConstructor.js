@@ -12,13 +12,25 @@ var PlayerCounterConstructor = function(view, model, pageConstructor) {
         this.insertPage(page);
 
         this.model.reduceHexagons();
-        this.view.showHexagons(this.hexagons);
-        // создать PlayerCounterView (там только количество игроков выбирается
-        // попросить объект PlayerCounterView уведомить об окончании выбора (передаст количество игроков)
+        this.view.showHexagons(this.model.hexagons);
+        this.deleteAllHandlersOnCanvas();
+        this.setHandlerOnRadioButton(this.handlerPlayerCounter.bind(this));
     };
 
     this.handlerPlayerCounter = function(playerCount) {
         this.model.players = PLAYERS_CONFIG.slice(0, playerCount);
+    };
+
+    this.setHandlerOnRadioButton = function(handler){
+        var radios = document.getElementsByName(RADIO_PLAYERS_COUNT);
+
+        for(var i = 0, count = radios.length; i < count; i++){
+            radios[i].onclick = function(){
+                if(this.checked){
+                    handler(this.value);
+                }
+            }
+        }
     };
 
     this.init(view, model, pageConstructor);

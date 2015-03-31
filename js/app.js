@@ -4,9 +4,9 @@
 var Application = function() {
     this.controller = {};
 
-    this.view = {};
-    this.model = {};
-    this.pageConstructor = {};
+    this.view = new CanvasView();
+    this.model = new GameModel();
+    this.pageConstructor = new PageConstructor();
 
     this.checkPageURI = function() {
         var self = this;
@@ -30,7 +30,7 @@ var Application = function() {
                         self.createGame();
                         break;
                     default:
-                        hashHistory = window.location.hash = HASH_URI.zone;
+                        window.location.hash = HASH_URI.zone;
                         break;
                 }
             }
