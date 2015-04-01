@@ -20,7 +20,7 @@ var CanvasView = function(){
         }
     };
 
-    this.showSelected = function(hexagons){
+    this.showMoves = function(hexagons){
         this.selected.clear();
 
         for( var i = 0, count = hexagons.length; i < count; i++){
@@ -36,7 +36,7 @@ var CanvasView = function(){
         }
     };
 
-    this.drawStep = function(newPearl, recolorPearls, deletedPearl){
+    this.showStep = function(newPearl, recolorPearls, deletedPearl){
         this.selected.clear();
 
         // рисуем новую жемчужину

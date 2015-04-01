@@ -1,10 +1,10 @@
 'use strict';
 
-var Pearl = function(center, radius, place, color){
-  this.center = new Coordinates(center.x, center.y);
-  this.radius = radius;
-  this.color = color;
-  this.place = new Coordinates(place.x, place.y);
+var Pearl = function(hexagon){
+    this.center.copyFrom(hexagon.center);
+    this.radius = hexagon.radius;
+    this.place.copyFrom(hexagon.place);
+    this.color = null;
 };
 
 Pearl.prototype.getRectangle = function(){

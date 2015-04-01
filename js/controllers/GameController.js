@@ -36,6 +36,9 @@ var GameController = function(view, model, pageConstructor) {
         this.view.setHandlerOnCanvas(CANVAS_EVENTS.mouseup, handler.bind(this));
     };
 
+    this.deleteAllHandlersOnCanvas = function(){
+        this.view.deleteAllHandlersOnCanvas();
+    };
 
     // то, что осталось в классе Game разделить и поместить либо сюда, либо в Model
     // в Model лежат Board, Hexagons, Pearls

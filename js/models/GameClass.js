@@ -65,7 +65,7 @@ var Game = function(canvasView, hexagons, players){
 
     // обработка хода
     this.process = function(position){
-       var place = this.findBoardPosition(position);
+       var place = this.findBoardPlaceByPoint(position);
        if (!place){
            return;
        }
@@ -86,7 +86,7 @@ var Game = function(canvasView, hexagons, players){
 
     // по координатам места, куда кликнули мышкой,
     // ищется соответствующий шестиугольник и возвращается позиция игровой доски
-    this.findBoardPosition = function(position){
+    this.findBoardPlaceByPoint = function(position){
         var place;
 
         for(var i = 0, count = this.hexagons.length; i < count; i++){

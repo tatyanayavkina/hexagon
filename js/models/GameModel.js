@@ -40,7 +40,8 @@ var GameModel = function(){
                 index = Math.floor(Math.random()* count);
                 hexagon = hexagons[index];
 
-                pearl = new Pearl(hexagon.center, hexagon.radius, hexagon.place, this.players[i].color);
+                pearl = new Pearl(hexagon);
+                pearl.color = this.players[i].color;
                 this.pearls.push(pearl);
 
                 hexagons.splice(index, 1);
@@ -121,7 +122,7 @@ var GameModel = function(){
         return hexagon;
     };
 
-    this.findByHexagon = function(hexagon){
+    this.findPlaceByHexagon = function(hexagon){
         var place = hexagon.place;
         var found = false;
 
@@ -133,5 +134,85 @@ var GameModel = function(){
         }
 
         return found;
-    }
+    };
+
+    this.findBoardPlaceByPoint = function(point){
+        var place = null;
+
+        for(var i = 0, count = this.hexagons.length; i < count; i++){
+            if(this.hexagons[i].containPoint(point)){
+                place = this.hexagons[i].place;
+                break;
+            }
+        }
+
+        return place;
+    };
+
+    this.hasPearl = function(place){
+        return this.board[place.x][place.y].pearl? true : false;
+    };
+
+    // проверка, что не вышли за границы доски
+    this.inBoard = function(place){
+        var x = place.x, y = place.y;
+        return (x >= 0 && x < this.board.length && y >= 0 && y < this.board[0].length)
+    };
+
+
+    this.getMoves = function(pearl){
+        var  newPlace, affected, hexagons;
+        var  availableMoves = {};
+        var place = pearl.place;
+
+        var hexagon = clone(this.board[place.x][place.y].hexagon);
+        hexagon.color = POSITIONS.jump.color;
+        availableMoves.hexagons = [hexagon];
+
+        for(var key in POSITIONS){
+            for(var i = 0, count = POSITIONS[key].positions.length, positions = POSITIONS[key].positions; i <count; i++){
+                newPlace = new Coordinates(place.x + positions[i].x, place.y + positions[i].y);
+
+                if(this.inBoard(newPlace) && !this.hasPearl(newPlace)){
+                    affected = this.getAffectedPearls(newPlace);
+                    availableMoves[newPlace] = new Move(this.board[newPlace.x][newPlace.y].hexagon, POSITIONS[key].type, affected);
+                    hexagon = clone(this.board[place.x][place.y].hexagon);
+                    hexagon.color = POSITIONS[key].color;
+
+                    availableMoves.hexagons.push(hexagon);
+                }
+            }
+        }
+
+        return availableMoves;
+    };
+
+    this.getAffectedPearls = function(place){
+        var placeX, placeY, newPlace, affected = [];
+
+        for(var i = 0, count = POSITIONS.copy.positions.length; i <count; i++){
+            placeX = place.x + POSITIONS.copy.positions[i].x;
+            placeY = place.y + POSITIONS.copy.positions[i].y;
+
+            newPlace = new Coordinates(placeX, placeY);
+
+            if(this.inBoard(newPlace) && this.hasPearl(newPlace)){
+                affected.push(newPlace);
+            }
+        }
+
+        return affected;
+    };
+
+    this.recolorPearls = function(positions){
+        var place, recolored = [];
+
+        for(var i = 0, count = positions.length; i < count; i++){
+            place = positions[i];
+            this.board[place.x][place.y].pearl.color = this.currentPlayer.color;
+            recolored.push(this.board[place.x][place.y].pearl);
+        }
+
+        return recolored;
+    };
 };

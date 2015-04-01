@@ -3,8 +3,10 @@
 var PearlsConstructor = function(view, model, pageConstructor) {
     // вызвать конструктор базового класса, передать view, model
     this.init = function(view, model, pageConstructor){
-          GameController.call(this, view, model, pageConstructor);
-          this.process();
+        GameController.call(this, view, model, pageConstructor);
+        this.index = -1;
+
+        this.process();
     };
 
     this.handlerPearlDown = function(point){
@@ -17,7 +19,7 @@ var PearlsConstructor = function(view, model, pageConstructor) {
     this.handlerPearlMove = function(point){
         if (this.index != -1){
             this.model.pearls[this.index].center.copyFrom(point);
-            this.view.showHexagons(this.model.pearls);
+            this.view.showPearls(this.model.pearls);
         }
     };
 
@@ -38,7 +40,7 @@ var PearlsConstructor = function(view, model, pageConstructor) {
             this.returnPearl(pearl, sourceHexagon);
             return;
         }
-        if (this.model.findByHexagon(destinationHexagon)) {
+        if (this.model.findPlaceByHexagon(destinationHexagon)) {
             // если в месте, куда нас перетащили, что-то есть, то верунться на исходное поле
             this.returnPearl(pearl, sourceHexagon);
             return;
