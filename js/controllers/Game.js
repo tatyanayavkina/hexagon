@@ -4,6 +4,7 @@ var PearlsConstructor = function(view, model, pageConstructor){
 
     this.init = function(view, model, pageConstructor){
         GameController.call(this, view, model, pageConstructor);
+        this.pointCounterService = new PointCounterService();
         this.currentPlayer = this.model.players[1];
         this.availableMoves = {};
 
@@ -12,7 +13,8 @@ var PearlsConstructor = function(view, model, pageConstructor){
 
     this.process = function(){
         this.model.initBoard();
-        //вставить статистику ...
+        // вставить статистику ...
+        // проверить возможность хода первому игроку
         this.setHandlerOnCanvasMouseDown(this.handlerCanvasClicked.bind(this));
     };
 
@@ -73,11 +75,15 @@ var PearlsConstructor = function(view, model, pageConstructor){
             delete this.board[deletedPlace.x][deletedPlace.y].pearl;
         }
 
+        // обновили массив фишек
+        this.model.refreshPearls();
+
         this.view.showStep(pearl,this.recolorPearls(currentMoving.affected), deleted);
         this.changePlayer();
 
         this.selectedPearl = null;
         // подсчитать очки
+        this.pointCounterService.count(this.model.pearls);
         // проверить на возможность продолжения игры
         this.postMove();
     };
@@ -109,7 +115,7 @@ var PearlsConstructor = function(view, model, pageConstructor){
         //this.addPearlsCountToPlayer();
         //this.timeoutDraw();
 
-        this.view.insertGameOver(this.count);  
+        this.page.insertGameOver(this.count);
     };
 
     this.changePlayer = function(){

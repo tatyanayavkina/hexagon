@@ -216,6 +216,18 @@ var GameModel = function(){
         return recolored;
     };
 
+    this.refreshPearls = function(){
+        this.pearls = [];
+
+        for(var i = 0, countI = this.board.length; i < countI; i++){
+            for(var j = 0, countJ = this.board[i].length; j < countJ; j++){
+                if(this.board[i][j].pearl){
+                    this.pearls.push(this.board[i][j].pearl);
+                }
+            }
+        }
+    };
+
     this.countFreeCells = function(){
         var count = 0;
 
