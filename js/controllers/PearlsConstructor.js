@@ -7,6 +7,31 @@ var PearlsConstructor = function(view, model, pageConstructor) {
           this.process();
     };
 
+    this.handlerPearlDown = function(point){
+        this.model.pearl = this.model.findPearlByPoint();
+        if (this.model.pearl){
+            this.model.sourceHexagon = this.model.findHexagonByPoint(point);
+        }
+    };
+
+    this.handlerPearlMove = function(point){
+        if (this.model.pearl){
+            this.model.pearl.center.copyFrom(point);
+            this.view.showHexagons(this.model.pearls);
+        }
+    };
+
+    this.handlerPearlUp = function(point){
+        if(this.model.pearl){
+            this.model.destinationHexagon = this.model.findHexagonByPoint(point);
+            this.handlerPearlMoved(this.model.pearl, this.model.sourceHexagon, this.model.destinationHexagon);
+
+            this.model.pearl = null;
+            this.model.sourceHexagon = null;
+            this.model.destinationHexagon = null;
+        }
+    };
+
     this.handlerPearlMoved = function(pearl, sourceHexagon, destinationHexagon) {
         if (destinationHexagon == null) {
             // потенциально можно было бы удалять фишку, но пока просто вернем ее на место
@@ -37,6 +62,10 @@ var PearlsConstructor = function(view, model, pageConstructor) {
         this.view.showPearls(this.model.pearls);
 
         this.deleteAllHandlersOnCanvas();
+
+        this.setHandlerOnCanvasMouseDown(this.handlerPearlDown.bind(this));
+        this.setHandlerOnCanvasMouseMove(this.handlerPearlMove.bind(this));
+        this.setHandlerOnCanvasMouseUp(this.handlerPearlUp.bind(this));
     };
 
 

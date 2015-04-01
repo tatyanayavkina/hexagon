@@ -27,7 +27,7 @@ var ZoneConstructor = function(view, model, pageConstructor) {
         this.model.initHexagons();
         this.view.showHexagons(this.model.hexagons);
         this.deleteAllHandlersOnCanvas();
-        this.setHandlerOnCanvasClick(this.handleCanvasClicked);
+        this.setHandlerOnCanvasMouseDown(this.handleCanvasClicked);
     };
 
 

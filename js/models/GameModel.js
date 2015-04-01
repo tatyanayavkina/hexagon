@@ -85,6 +85,18 @@ var GameModel = function(){
         }
     };
 
+    this.findPearlByPoint = function(point){
+        var pearl = null;
+        for (var i = 0, count = this.pearls.length; i < count; i++) {
+            if (this.pearls[i].containPoint(point)) {
+                pearl = this.pearls[i];
+                break;
+            }
+        }
+
+        return pearl;
+    };
+
     this.findHexagonByPoint = function(point){
         var hexagon = null;
         for(var i = 0, count = this.hexagons.length; i < count; i++){
