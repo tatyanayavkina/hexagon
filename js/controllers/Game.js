@@ -77,8 +77,40 @@ var PearlsConstructor = function(view, model, pageConstructor){
         this.changePlayer();
 
         this.selectedPearl = null;
+        // подсчитать очки
+        // проверить на возможность продолжения игры
+        this.postMove();
     };
 
+    this.postMove = function(){
+        // нет свободных клеток
+        if(!this.model.countFreeCells()){
+            this.page.insertGameOver(this.count);
+            return;
+        }
+        // нет ходов у текущего игрока
+        if(!this.model.playerHasMoves()){
+            this.whenPlayerHasNoMoves();
+            return;
+        }
+        // игра продолжается
+        this.page.insertStatistic(this.currentPlayer.color, this.count);
+    };
+
+    this.whenPlayerHasNoMoves = function(){
+        var index = this.model.players.indexOf(this.currentPlayer);
+        this.changePlayer();
+        //если сейчас больше 2-х игроков, то игрок, у которого нет ходов, удаляется из списка
+        if(this.model.players.length > 2){
+            this.model.players.splice(index, 1);
+            this.postMove();
+            return;
+        }
+        //this.addPearlsCountToPlayer();
+        //this.timeoutDraw();
+
+        this.view.insertGameOver(this.count);  
+    };
 
     this.changePlayer = function(){
         // находим индекс следующего игрока в массиве

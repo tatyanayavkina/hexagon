@@ -215,4 +215,37 @@ var GameModel = function(){
 
         return recolored;
     };
+
+    this.countFreeCells = function(){
+        var count = 0;
+
+        for(var i = 0; i < GAME_SIZE; i++ ){
+            for (var j = 0; j < GAME_SIZE; j++){
+                if (this.board[i][j] && !this.board[i][j].pearl){
+                    count ++;
+                }
+            }
+        }
+
+        return count;
+    };
+
+    // проверка - у игрока есть возможность хода
+    this.playerHasMoves = function(player){
+        var has = false; var moves;
+
+        for( var i = 0, count = this.pearls.length; i < count; i++ ){
+            if(this.pearls[i].color == player.color){
+                moves = this.getMoves(this.pearls[i].place);
+                delete moves.hexagons;
+
+                if (Object.keys(this.availableCells).length > 0){
+                    has = true;
+                    break;
+                }
+            }
+        }
+
+        return has;
+    };
 };

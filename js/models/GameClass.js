@@ -236,7 +236,7 @@ var Game = function(canvasView, hexagons, players){
             return;
         }
         // нет ходов у текущего игрока
-        if(!this.playerHasMoveCells()){
+        if(!this.playerHasMoves()){
             this.whenPlayerHasNoMoves();
             return;
         }
@@ -256,7 +256,7 @@ var Game = function(canvasView, hexagons, players){
     };
 
     // проверка - у игрока есть возможность хода
-    this.playerHasMoveCells = function(){
+    this.playerHasMoves = function(){
         var has = false;
 
         for( var i = 0, count = this.pearls.length; i < count; i++ ){
