@@ -97,6 +97,18 @@ var GameModel = function(){
         return pearl;
     };
 
+    this.findPearlIndexByPoint = function(point){
+        var index = -1;
+        for (var i = 0, count = this.pearls.length; i < count; i++) {
+            if (this.pearls[i].containPoint(point)) {
+                index = i;
+                break;
+            }
+        }
+
+        return index;
+    };
+
     this.findHexagonByPoint = function(point){
         var hexagon = null;
         for(var i = 0, count = this.hexagons.length; i < count; i++){

@@ -8,27 +8,27 @@ var PearlsConstructor = function(view, model, pageConstructor) {
     };
 
     this.handlerPearlDown = function(point){
-        this.model.pearl = this.model.findPearlByPoint();
-        if (this.model.pearl){
-            this.model.sourceHexagon = this.model.findHexagonByPoint(point);
+        this.index = this.model.findPearlIndexByPoint(point);
+        if (this.index != -1){
+            this.sourceHexagon = this.model.findHexagonByPoint(point);
         }
     };
 
     this.handlerPearlMove = function(point){
-        if (this.model.pearl){
-            this.model.pearl.center.copyFrom(point);
+        if (this.index != -1){
+            this.model.pearls[this.index].center.copyFrom(point);
             this.view.showHexagons(this.model.pearls);
         }
     };
 
     this.handlerPearlUp = function(point){
-        if(this.model.pearl){
-            this.model.destinationHexagon = this.model.findHexagonByPoint(point);
-            this.handlerPearlMoved(this.model.pearl, this.model.sourceHexagon, this.model.destinationHexagon);
+        if(this.index != -1){
+            this.destinationHexagon = this.model.findHexagonByPoint(point);
+            this.handlerPearlMoved(this.model.pearls[this.index], this.sourceHexagon, this.destinationHexagon);
 
-            this.model.pearl = null;
-            this.model.sourceHexagon = null;
-            this.model.destinationHexagon = null;
+            this.view.showPearls(this.model.pearls);
+
+            this.index = -1;
         }
     };
 
