@@ -68,22 +68,21 @@ body {
   .button-a:hover {
     background-color: rgba(39, 0, 43, 0.5); }
 
-#game-info {
-  max-width: 300px;
+.game-statistic {
   text-align: center; }
-  #game-info .wrapper {
+  .game-statistic .wrapper {
     width: 100%;
     margin-top: 5px; }
-    #game-info .wrapper .red {
+    .game-statistic .wrapper .red {
       background-color: #ff5742; }
-    #game-info .wrapper .blue {
+    .game-statistic .wrapper .blue {
       background-color: #908cfe; }
-    #game-info .wrapper .white {
+    .game-statistic .wrapper .white {
       background-color: #cfccc4; }
-    #game-info .wrapper .statistic {
+    .game-statistic .wrapper .statistic {
       display: inline-block;
       padding: 5px 0; }
-  #game-info .current-player {
+  .game-statistic .current-player {
     width: 100%;
     padding: 5px 0; }
 

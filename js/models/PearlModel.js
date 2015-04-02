@@ -1,6 +1,9 @@
 'use strict';
 
 var Pearl = function(hexagon){
+    this.center = new Coordinates(-1,-1);
+    this.place = new Coordinates(-1,-1);
+
     this.center.copyFrom(hexagon.center);
     this.radius = hexagon.radius;
     this.place.copyFrom(hexagon.place);

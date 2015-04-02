@@ -144,16 +144,15 @@ body {
   }
 }
 
-#game-info{
-    max-width: 300px;
 
-    text-align: center;
+.game-statistic{
+  text-align: center;
 
-    @include statistic;
-    .current-player{
-       width: 100%;
-       padding: 5px 0;
-    }
+  @include statistic;
+  .current-player{
+    width: 100%;
+    padding: 5px 0;
+  }
 }
 
 .banner{

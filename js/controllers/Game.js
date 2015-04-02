@@ -1,20 +1,24 @@
 'use strict';
 
-var PearlsConstructor = function(view, model, pageConstructor){
+var Game = function(view, model, pageConstructor){
 
     this.init = function(view, model, pageConstructor){
         GameController.call(this, view, model, pageConstructor);
         this.pointCounterService = new PointCounterService();
-        this.currentPlayer = this.model.players[1];
+        this.points = {};
+        this.currentPlayer = this.model.players[0];
         this.availableMoves = {};
 
         this.process();
     };
 
     this.process = function(){
+        var page = this.pageConstructor.createPageGamePlay();
+        this.pageConstructor.insertPage(page);
+
         this.model.initBoard();
-        // вставить статистику ...
-        // проверить возможность хода первому игроку
+        this.points = this.pointCounterService.count(this.model.pearls);
+        this.postMove();
         this.setHandlerOnCanvasMouseDown(this.handlerCanvasClicked.bind(this));
     };
 
@@ -77,13 +81,13 @@ var PearlsConstructor = function(view, model, pageConstructor){
 
         // обновили массив фишек
         this.model.refreshPearls();
-
+        // отрисовали ход
         this.view.showStep(pearl,this.recolorPearls(currentMoving.affected), deleted);
         this.changePlayer();
 
         this.selectedPearl = null;
         // подсчитать очки
-        this.pointCounterService.count(this.model.pearls);
+        this.points = this.pointCounterService.count(this.model.pearls);
         // проверить на возможность продолжения игры
         this.postMove();
     };
@@ -91,16 +95,16 @@ var PearlsConstructor = function(view, model, pageConstructor){
     this.postMove = function(){
         // нет свободных клеток
         if(!this.model.countFreeCells()){
-            this.page.insertGameOver(this.count);
+            this.pageConstructor.insertGameOver(this.count);
             return;
         }
         // нет ходов у текущего игрока
-        if(!this.model.playerHasMoves()){
+        if(!this.model.playerHasMoves(this.currentPlayer)){
             this.whenPlayerHasNoMoves();
             return;
         }
         // игра продолжается
-        this.page.insertStatistic(this.currentPlayer.color, this.count);
+        this.pageConstructor.insertStatistic(this.currentPlayer.color, this.points);
     };
 
     this.whenPlayerHasNoMoves = function(){
@@ -112,10 +116,10 @@ var PearlsConstructor = function(view, model, pageConstructor){
             this.postMove();
             return;
         }
-        //this.addPearlsCountToPlayer();
+        this.pointCounterService.addPearlsCountToPlayer(this.points, this.model);
         //this.timeoutDraw();
 
-        this.page.insertGameOver(this.count);
+        this.pageConstructor.insertGameOver(this.count);
     };
 
     this.changePlayer = function(){

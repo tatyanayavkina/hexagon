@@ -156,7 +156,7 @@ var GameModel = function(){
     // проверка, что не вышли за границы доски
     this.inBoard = function(place){
         var x = place.x, y = place.y;
-        return (x >= 0 && x < this.board.length && y >= 0 && y < this.board[0].length)
+        return  (x >= 0 && x < this.board.length && y >= 0 && y < this.board[0].length && this.board[x][y]);
     };
 
 
@@ -248,10 +248,10 @@ var GameModel = function(){
 
         for( var i = 0, count = this.pearls.length; i < count; i++ ){
             if(this.pearls[i].color == player.color){
-                moves = this.getMoves(this.pearls[i].place);
+                moves = this.getMoves(this.pearls[i]);
                 delete moves.hexagons;
 
-                if (Object.keys(this.availableCells).length > 0){
+                if (Object.keys(moves).length > 0){
                     has = true;
                     break;
                 }

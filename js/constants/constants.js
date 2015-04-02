@@ -1,7 +1,8 @@
 'use strict';
 // id-ки элементов
 var INFO = 'info';
-var BUTTON_SELECT_PLAYERS = 'playersCount';
+var STATISTIC = 'game-statistic';
+var GAME_RESULT = 'result';
 var BANNER_SELECT_PLAYERS = 'player-banner';
 var RADIO_PLAYERS_COUNT = 'players';
 

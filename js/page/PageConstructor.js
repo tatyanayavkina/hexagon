@@ -50,7 +50,7 @@ var PageConstructor = function(){
         var html = '';
 
         html += '<div class="game-table-info-title">Игра</div>' +
-                '<div id="game-info">' +
+                '<div id="game-statistic" class="game-statistic">' +
                 '</div>';
 
 
@@ -58,7 +58,7 @@ var PageConstructor = function(){
                     '<div class="banner-inner">' +
                         '<div>Игра завершена</div>' +
                         '<div id="result"></div>' +
-                        '<div class="button-a-wrapper"><a class="button-a" href="'+ HASH_URI.zone+'">Новая игра</a></div>' +
+                        '<div class="button-a-wrapper"><a class="button-a" href="./">Новая игра</a></div>' +
                     '</div>' +
                 '</div>';
 
@@ -66,8 +66,51 @@ var PageConstructor = function(){
     };
 
     this.insertPage = function(html){
-        var element = document.getElementById('page');
+        var element = document.getElementById(INFO);
         element.innerHTML = html;
     };
+
+    this.buildStatistic = function(player, count){
+        var width = 100/Object.keys(count).length;
+        var html = '<div class="current-player" style="background-color: '+ player[0] +'">Сейчас ходят</div>';
+
+        html += '<div class="wrapper">';
+        for(var key in count){
+            html += '<div class="statistic" style="width:'+ width + '%;background-color: '+ key +';">' + count[key] + '</div>'
+        }
+
+        html += '</div>';
+
+        return html;
+    };
+
+    this.buildGameOver = function(count){
+        var width = 100/Object.keys(count).length;
+        var html = '<div class="wrapper">';
+
+        for(var key in count){
+            html += '<div class="statistic" style="width:'+ width + '%;background-color: '+ key +';">' + count[key] + '</div>'
+        }
+        html += '</div>';
+
+        return  html;
+    };
+
+    this.insertStatistic = function(player, count){
+        var statisticDiv = document.getElementById(STATISTIC);
+        statisticDiv.innerHTML = this.buildStatistic(player, count);
+    };
+
+    this.insertGameOver = function(count){
+        //удаляем статистику с основной страницы
+        var statisticDiv = document.getElementById(STATISTIC);
+        statisticDiv.parentNode.removeChild(statisticDiv);
+
+        //добавляем информацию о завершении на баннер
+        var gameOver = document.getElementById(GAME_RESULT);
+        gameOver.innerHTML = this.buildGameOver(count);
+
+        document.getElementById('winner-banner').style.display = 'block';
+    }
 
 };
