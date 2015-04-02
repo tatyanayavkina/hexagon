@@ -15,5 +15,9 @@ var PointCounterService = function(){
             }
         }
         return points;
-    }
+    };
+
+    this.addPearlsCountToPlayer = function(points, color, count){
+        points[color[0]] += count;
+    };
 };

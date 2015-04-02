@@ -161,7 +161,7 @@ var GameModel = function(){
 
 
     this.getMoves = function(pearl){
-        var  newPlace, affected, hexagons;
+        var  newPlace, affected;
         var  availableMoves = {};
         var place = pearl.place;
 
@@ -176,7 +176,7 @@ var GameModel = function(){
                 if(this.inBoard(newPlace) && !this.hasPearl(newPlace)){
                     affected = this.getAffectedPearls(newPlace);
                     availableMoves[newPlace] = new Move(this.board[newPlace.x][newPlace.y].hexagon, POSITIONS[key].type, affected);
-                    hexagon = clone(this.board[place.x][place.y].hexagon);
+                    hexagon = clone(this.board[newPlace.x][newPlace.y].hexagon);
                     hexagon.color = POSITIONS[key].color;
 
                     availableMoves.hexagons.push(hexagon);
@@ -204,15 +204,19 @@ var GameModel = function(){
         return affected;
     };
 
-    this.recolorPearls = function(positions){
+    this.addPearlToBoard = function(pearl){
+        var place = pearl.place;
+        this.board[place.x][place.y].pearl = pearl;
+    };
+
+    this.recolorPearls = function(positions, color){
         var place, recolored = [];
 
         for(var i = 0, count = positions.length; i < count; i++){
             place = positions[i];
-            this.board[place.x][place.y].pearl.color = this.currentPlayer.color;
+            this.board[place.x][place.y].pearl.color = color;
             recolored.push(this.board[place.x][place.y].pearl);
         }
-
         return recolored;
     };
 
@@ -221,7 +225,7 @@ var GameModel = function(){
 
         for(var i = 0, countI = this.board.length; i < countI; i++){
             for(var j = 0, countJ = this.board[i].length; j < countJ; j++){
-                if(this.board[i][j].pearl){
+                if(this.board[i][j] && this.board[i][j].pearl){
                     this.pearls.push(this.board[i][j].pearl);
                 }
             }
@@ -260,4 +264,19 @@ var GameModel = function(){
 
         return has;
     };
+
+    this.createPearls = function(color){
+        var pearl, pearls = [];
+        for(var i = 0; i < GAME_SIZE; i++ ){
+            for (var j = 0; j < GAME_SIZE; j++){
+                if (this.board[i][j] && !this.board[i][j].pearl){
+                    pearl = (new Pearl(this.board[i][j].hexagon));
+                    pearl.color = color;
+                    pearls.push(pearl);
+                }
+            }
+        }
+
+        return pearls;
+    }
 };

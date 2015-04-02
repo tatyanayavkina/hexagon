@@ -22,6 +22,7 @@ var CanvasView = function(){
 
     this.showMoves = function(hexagons){
         this.selected.clear();
+        hexagons = hexagons || [];
 
         for( var i = 0, count = hexagons.length; i < count; i++){
             this.selected.drawHexagon(hexagons[i], false, true);

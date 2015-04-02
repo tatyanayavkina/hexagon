@@ -19,6 +19,8 @@ var Game = function(view, model, pageConstructor){
         this.model.initBoard();
         this.points = this.pointCounterService.count(this.model.pearls);
         this.postMove();
+
+        this.deleteAllHandlersOnCanvas();
         this.setHandlerOnCanvasMouseDown(this.handlerCanvasClicked.bind(this));
     };
 
@@ -38,7 +40,6 @@ var Game = function(view, model, pageConstructor){
     };
 
     this.handlerPearlClicked = function(pearl) {
-        pearl = clone(pearl);
 
         if (this.currentPlayer.color != pearl.color) {
             // можно было бы потенциально противный звук издавать
@@ -68,24 +69,25 @@ var Game = function(view, model, pageConstructor){
 
         var pearl = new Pearl(hexagon);
         pearl.color = this.currentPlayer.color;
+        this.model.addPearlToBoard(pearl);
 
         var deleted;
         if (currentMoving.type == POSITIONS.jump.type) {
             // находим позицию удаляемой жемчужины
             var deletedPlace = this.selectedPearl.place;
-            deleted = new Pearl(this.model.board[deletedPlace.x][deletedPlace.y]);
+            deleted = new Pearl(this.model.board[deletedPlace.x][deletedPlace.y].hexagon);
             deleted.getRectangle();
             // удаляем ее из списка
-            delete this.board[deletedPlace.x][deletedPlace.y].pearl;
+            delete this.model.board[deletedPlace.x][deletedPlace.y].pearl;
         }
 
         // обновили массив фишек
         this.model.refreshPearls();
         // отрисовали ход
-        this.view.showStep(pearl,this.recolorPearls(currentMoving.affected), deleted);
+        this.view.showStep(pearl,this.model.recolorPearls(currentMoving.affected, this.currentPlayer.color), deleted);
         this.changePlayer();
 
-        this.selectedPearl = null;
+        delete this.selectedPearl;
         // подсчитать очки
         this.points = this.pointCounterService.count(this.model.pearls);
         // проверить на возможность продолжения игры
@@ -95,7 +97,7 @@ var Game = function(view, model, pageConstructor){
     this.postMove = function(){
         // нет свободных клеток
         if(!this.model.countFreeCells()){
-            this.pageConstructor.insertGameOver(this.count);
+            this.pageConstructor.insertGameOver(this.points);
             return;
         }
         // нет ходов у текущего игрока
@@ -116,10 +118,15 @@ var Game = function(view, model, pageConstructor){
             this.postMove();
             return;
         }
-        this.pointCounterService.addPearlsCountToPlayer(this.points, this.model);
-        //this.timeoutDraw();
+        this.pointCounterService.addPearlsCountToPlayer(this.points, this.currentPlayer.color, this.model.countFreeCells());
+        this.timeoutDraw();
 
-        this.pageConstructor.insertGameOver(this.count);
+        this.pageConstructor.insertGameOver(this.points);
+    };
+
+    this.timeoutDraw = function(){
+        var pearls = this.model.createPearls(this.currentPlayer.color);
+        this.view.drawPearlsTimeout(pearls);
     };
 
     this.changePlayer = function(){
