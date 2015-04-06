@@ -19,15 +19,19 @@ var Application = function() {
                 switch (hash){
                     case HASH_URI.zone:
                         self.createZoneConstructor();
+                        self.controller.process();
                         break;
                     case HASH_URI.count:
                         self.createPlayerCounter();
+                        self.controller.process();
                         break;
                     case HASH_URI.pearls:
                         self.createPearlsConstructor();
+                        self.controller.process();
                         break;
                     case HASH_URI.game:
                         self.createGame();
+                        self.controller.process();
                         break;
                     default:
                         window.location.hash = HASH_URI.zone;
