@@ -97,7 +97,7 @@ Game.prototype.postMove = function(){
 
     //если играет компьютер нужно, выполнить ход, обновить статистику, сменить игрока, отрисовать ход, -> сделать имитацию клика????
     if (this.computer && this.currentPlayer.color == this.computer.color){
-        this.computer.makeMove(this.model);
+        this.computer.makeMove(this.model, this.view);
     }
 };
 

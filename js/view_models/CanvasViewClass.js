@@ -90,4 +90,22 @@ var CanvasView = function(){
 
     };
 
+    this.simulateClick = function(point){
+        var left = this.pearls.canvas.getBoundingClientRect().left;
+        var top = this.pearls.canvas.getBoundingClientRect().top;
+        var element = document.elementFromPoint(point.x + left, point.y + top);
+
+        var evt = new MouseEvent('mousedown',{
+            'view': window,
+            'bubbles': true,
+            'cancelable': true,
+            'clientX': point.x + left,
+            'clientY': point.y + top,
+            'screenX': point.x + left,
+            'screenY': point.y + top
+        });
+
+        element.dispatchEvent(evt);
+    }
+
  };
