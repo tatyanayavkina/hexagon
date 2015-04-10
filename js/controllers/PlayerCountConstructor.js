@@ -15,10 +15,15 @@ PlayerCounterConstructor.prototype.process = function() {
     this.view.showHexagons(this.model.hexagons);
     this.deleteAllHandlersOnCanvas();
     this.setHandlerOnRadioButton(this.handlerPlayerCounter.bind(this));
+    this.setHandlerOnCheckboxButton(this.handlerComputerPlays.bind(this));
 };
 
 PlayerCounterConstructor.prototype.handlerPlayerCounter = function(playerCount) {
     this.model.players = PLAYERS_CONFIG.slice(0, playerCount);
+};
+
+PlayerCounterConstructor.prototype.handlerComputerPlays = function(plays){
+    this.model.computerPlays = plays;
 };
 
 PlayerCounterConstructor.prototype.setHandlerOnRadioButton = function(handler){
@@ -30,5 +35,13 @@ PlayerCounterConstructor.prototype.setHandlerOnRadioButton = function(handler){
                 handler(this.value);
             }
         }
+    }
+};
+
+PlayerCounterConstructor.prototype.setHandlerOnCheckboxButton = function(handler){
+    var checkbox = document.getElementById(COMPUTER);
+
+    checkbox.onclick = function(){
+        handler(this.checked);
     }
 };

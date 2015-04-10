@@ -29,6 +29,7 @@ var PageConstructor = function(){
         }
 
         html += '</div>' +
+                '<div><input class="checkbox" id="computer" type="checkbox"><label class="radio-label">Игра с компьютером</label></div>' +
                 '<div class="button-a-wrapper"><a class="button-a" href="'+ HASH_URI.pearls+'">Расставить фишки</a></div>';
 
         return html;
@@ -70,7 +71,7 @@ var PageConstructor = function(){
         element.innerHTML = html;
     };
 
-    this.buildStatistic = function(player, count){
+    this.buildStatistic = function(player, count, computer){
         var width = 100/Object.keys(count).length;
         var html = '<div class="current-player" style="background-color: '+ player[0] +'">Сейчас ходят</div>';
 
@@ -80,6 +81,10 @@ var PageConstructor = function(){
         }
 
         html += '</div>';
+
+        if(computer){
+            html += '<div class="current-player" style="background-color: '+ computer.color[0] +'">Компьютер</div>';
+        }
 
         return html;
     };
@@ -93,12 +98,14 @@ var PageConstructor = function(){
         }
         html += '</div>';
 
+
+
         return  html;
     };
 
-    this.insertStatistic = function(player, count){
+    this.insertStatistic = function(player, count, computer){
         var statisticDiv = document.getElementById(STATISTIC);
-        statisticDiv.innerHTML = this.buildStatistic(player, count);
+        statisticDiv.innerHTML = this.buildStatistic(player, count, computer);
     };
 
     this.insertGameOver = function(count){

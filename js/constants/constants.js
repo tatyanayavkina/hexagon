@@ -5,6 +5,7 @@ var STATISTIC = 'game-statistic';
 var GAME_RESULT = 'result';
 var BANNER_SELECT_PLAYERS = 'player-banner';
 var RADIO_PLAYERS_COUNT = 'players';
+var COMPUTER = 'computer';
 
 // адреса для страниц
 var HASH_URI = {
@@ -114,6 +115,7 @@ var MOVE_TYPES = {
     selected  : 'selected',
     move      : 'move'
 };
+
 
 
 

@@ -84,9 +84,11 @@ body {
       padding: 5px 0; }
   .game-statistic .current-player {
     width: 100%;
+    margin-top: 5px;
     padding: 5px 0; }
 
 .banner {
+  display: none;
   position: absolute;
   top: 0;
   right: 0;

@@ -5,6 +5,7 @@ var GameModel = function(){
     this.hexagons = [];
     this.pearls = [];
     this.players = PLAYERS_CONFIG.slice(0,2);
+    this.computerPlays = false;
 
     this.initHexagons = function(){
         var startX = START_POINT.x, startY = START_POINT.y;
@@ -174,7 +175,7 @@ var GameModel = function(){
                 newPlace = new Coordinates(place.x + positions[i].x, place.y + positions[i].y);
 
                 if(this.inBoard(newPlace) && !this.hasPearl(newPlace)){
-                    affected = this.getAffectedPearls(newPlace);
+                    affected = this.getAffectedPearls(newPlace, pearl.color);
                     availableMoves[newPlace] = new Move(this.board[newPlace.x][newPlace.y].hexagon, POSITIONS[key].type, affected);
                     hexagon = clone(this.board[newPlace.x][newPlace.y].hexagon);
                     hexagon.color = POSITIONS[key].color;
@@ -187,7 +188,7 @@ var GameModel = function(){
         return availableMoves;
     };
 
-    this.getAffectedPearls = function(place){
+    this.getAffectedPearls = function(place, color){
         var placeX, placeY, newPlace, affected = [];
 
         for(var i = 0, count = POSITIONS.copy.positions.length; i <count; i++){
@@ -196,7 +197,7 @@ var GameModel = function(){
 
             newPlace = new Coordinates(placeX, placeY);
 
-            if(this.inBoard(newPlace) && this.hasPearl(newPlace)){
+            if(this.inBoard(newPlace) && this.hasPearl(newPlace) && this.board[newPlace.x][newPlace.y].pearl.color != color){
                 affected.push(newPlace);
             }
         }
@@ -278,5 +279,19 @@ var GameModel = function(){
         }
 
         return pearls;
-    }
+    };
+
+    this.findBestPearlMove = function(moves){
+        var bestMove = {};
+
+        for(var key in moves){
+            if (key != 'hexagons'){
+                if(Object.keys(bestMove).length == 0 || moves[key].affected.length > bestMove.affected.length){
+                    bestMove = moves[key];
+                }
+            }
+        }
+
+        return bestMove;
+    };
 };

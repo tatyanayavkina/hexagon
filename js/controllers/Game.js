@@ -6,6 +6,11 @@ var Game = function(view, model, pageConstructor){
     this.points = {};
     this.currentPlayer = this.model.players[0];
     this.availableMoves = {};
+    this.computer = null;
+
+    if (this.model.computerPlays){
+        this.computer = new ComputerPlayer(this.model.players[this.model.players.length - 1].color);
+    }
 };
 
 Game.prototype = new GameController();
@@ -88,7 +93,12 @@ Game.prototype.postMove = function(){
         return;
     }
     // игра продолжается
-    this.pageConstructor.insertStatistic(this.currentPlayer.color, this.points);
+    this.pageConstructor.insertStatistic(this.currentPlayer.color, this.points, this.computer);
+
+    //если играет компьютер нужно, выполнить ход, обновить статистику, сменить игрока, отрисовать ход, -> сделать имитацию клика????
+    if (this.computer && this.currentPlayer.color == this.computer.color){
+        this.computer.makeMove(this.model);
+    }
 };
 
 Game.prototype.whenPlayerHasNoMoves = function(){
