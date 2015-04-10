@@ -74,7 +74,6 @@ var CanvasView = function(){
         function getCoordinates(event){
             var x = event.pageX - this.getBoundingClientRect().left;
             var y = event.pageY - this.getBoundingClientRect().top;
-
             handler(new Coordinates(x,y));
         }
     };

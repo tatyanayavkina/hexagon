@@ -120,4 +120,14 @@ body {
           display: inline-block;
           padding: 5px 0; }
 
+div#pointer {
+  display: none;
+  position: absolute;
+  top: 5%;
+  right: 10%;
+  width: 15px;
+  height: 15px;
+  background-image: url("../images/pointer.png");
+  background-size: cover; }
+
 /*# sourceMappingURL=style.css.map */

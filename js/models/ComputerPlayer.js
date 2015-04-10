@@ -5,15 +5,17 @@ var ComputerPlayer = function(color){
 };
 
 ComputerPlayer.prototype.makeMove = function(gameModel, view){
+    this.lockMouse();
+
     var clickedPearl, clickedHexagon;
     var bestMove = this.findBestMove(gameModel);
 
     clickedPearl = bestMove.pearl;
     clickedHexagon = bestMove.move.hexagon;
 
-    setTimeout(function(){view.simulateClick(clickedPearl.center)}, 1000);
-
-    setTimeout( function(){view.simulateClick(clickedHexagon.center)}, 2000);
+    var self = this;
+    setTimeout(function(){view.simulateClick(clickedPearl.center);}, 1000);
+    setTimeout( function(){view.simulateClick(clickedHexagon.center); self.unlockMouse();}, 2000);
 };
 
 ComputerPlayer.prototype.findBestMove = function(gameModel){
@@ -37,5 +39,15 @@ ComputerPlayer.prototype.findBestMove = function(gameModel){
 
     return {pearl: bestPearl, move: bestMove}
 
+};
+
+ComputerPlayer.prototype.lockMouse = function (){
+   document.getElementsByTagName('html')[0].style.cursor = 'none';
+   document.getElementById('pointer').style.display = 'block';
+};
+
+ComputerPlayer.prototype.unlockMouse = function(){
+    document.getElementsByTagName('html')[0].style.cursor = 'default';
+    document.getElementById('pointer').style.display = 'none';
 };
 
