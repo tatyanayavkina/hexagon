@@ -87,18 +87,6 @@ var GameModel = function(){
         }
     };
 
-    this.findPearlByPoint = function(point){
-        var pearl = null;
-        for (var i = 0, count = this.pearls.length; i < count; i++) {
-            if (this.pearls[i].containPoint(point)) {
-                pearl = this.pearls[i];
-                break;
-            }
-        }
-
-        return pearl;
-    };
-
     this.findPearlIndexByPoint = function(point){
         var index = -1;
         for (var i = 0, count = this.pearls.length; i < count; i++) {
@@ -283,5 +271,20 @@ var GameModel = function(){
         }
 
         return bestMove;
+    };
+
+    this.move = function(selected, newPearl, moveType){
+        var deleted;
+        // add new pearl to board
+        this.addPearlToBoard(newPearl);
+       // if moveType is "jump", delete selected
+        if (moveType == POSITIONS.jump.type) {
+            // находим позицию удаляемой жемчужины
+            var deletedPlace = selected.place;
+            deleted = new Pearl(this.board[deletedPlace.x][deletedPlace.y].hexagon);
+            deleted.getRectangle();
+            // удаляем ее из списка
+            delete this.board[deletedPlace.x][deletedPlace.y].pearl;
+        }
     };
 };

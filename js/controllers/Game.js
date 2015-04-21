@@ -55,41 +55,32 @@ Game.prototype.handlerHexagonClicked = function(hexagon) {
 
     var pearl = new Pearl(hexagon);
     pearl.color = this.currentPlayer.color;
-    this.model.addPearlToBoard(pearl);
+    // make move
+    this.model.move(this.selectedPearl, pearl, currentMoving.type);
 
-    var deleted;
-    if (currentMoving.type == POSITIONS.jump.type) {
-        // находим позицию удаляемой жемчужины
-        var deletedPlace = this.selectedPearl.place;
-        deleted = new Pearl(this.model.board[deletedPlace.x][deletedPlace.y].hexagon);
-        deleted.getRectangle();
-        // удаляем ее из списка
-        delete this.model.board[deletedPlace.x][deletedPlace.y].pearl;
-    }
-
-    // отрисовали ход
+    // paint move
     this.view.showStep(pearl,this.model.recolorPearls(currentMoving.affected, this.currentPlayer.color), deleted);
     this.changePlayer();
 
     delete this.selectedPearl;
-    // подсчитать очки
+    // count scores
     this.points = PointCounterService.count(this.model.board);
-    // проверить на возможность продолжения игры
+    // check if game can be continued
     this.postMove();
 };
 
 Game.prototype.postMove = function(){
-    // нет свободных клеток
+    // no free cells in board
     if(!this.model.countFreeCells()){
         this.pageConstructor.insertGameOver(this.points);
         return;
     }
-    // нет ходов у текущего игрока
+    // currentPlayer has no moves
     if(!this.model.playerHasMoves(this.currentPlayer)){
         this.whenPlayerHasNoMoves();
         return;
     }
-    // игра продолжается
+    // game continue
     this.pageConstructor.insertStatistic(this.currentPlayer.color, this.points, this.computer);
 
     //если играет компьютер нужно, выполнить ход, обновить статистику, сменить игрока, отрисовать ход, -> сделать имитацию клика????
@@ -101,7 +92,7 @@ Game.prototype.postMove = function(){
 Game.prototype.whenPlayerHasNoMoves = function(){
     var index = this.model.players.indexOf(this.currentPlayer);
     this.changePlayer();
-    //если сейчас больше 2-х игроков, то игрок, у которого нет ходов, удаляется из списка
+    // if there is more than 2 players, then delete "player with no moves" from playerList
     if(this.model.players.length > 2){
         this.model.players.splice(index, 1);
         this.postMove();
@@ -119,9 +110,9 @@ Game.prototype.timeoutDraw = function(){
 };
 
 Game.prototype.changePlayer = function(){
-    // находим индекс следующего игрока в массиве
+    // find next player index in array
     var index = this.model.players.indexOf(this.currentPlayer) + 1;
-    //если вышли за пределы, возвращаемся к началу
+    // if index is more than array length then index will be 0
     if(index == this.model.players.length){
         index = 0;
     }
