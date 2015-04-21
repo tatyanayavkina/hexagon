@@ -49,7 +49,7 @@ Game.prototype.handlerHexagonClicked = function(hexagon) {
         return;
     }
 
-    var currentMoving = this.availableMoves[hexagon.place];
+    var currentMoving = this.availableMoves.to[hexagon.place];
     if (!currentMoving) {
         return;
     }

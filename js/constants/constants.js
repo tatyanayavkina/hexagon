@@ -109,12 +109,9 @@ var POSITIONS = {
   }
 };
 
-// типы хода
-var MOVE_TYPES = {
-    unselected: 'unselected',
-    selected  : 'selected',
-    move      : 'move'
-};
+var BIG_VALUE = 1000000;
+
+
 
 
 

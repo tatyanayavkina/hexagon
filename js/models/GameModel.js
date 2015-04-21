@@ -169,6 +169,8 @@ var GameModel = function(){
         var hexagon = clone(this.board[place.x][place.y].hexagon);
         hexagon.color = POSITIONS.jump.color;
         availableMoves.hexagons = [hexagon];
+        availableMoves.from = pearl.place;
+        availableMoves.to = {};
 
         for(var key in POSITIONS){
             for(var i = 0, count = POSITIONS[key].positions.length, positions = POSITIONS[key].positions; i <count; i++){
@@ -176,7 +178,7 @@ var GameModel = function(){
 
                 if(this.inBoard(newPlace) && !this.hasPearl(newPlace)){
                     affected = this.getAffectedPearls(newPlace, pearl.color);
-                    availableMoves[newPlace] = new Move(this.board[newPlace.x][newPlace.y].hexagon, POSITIONS[key].type, affected);
+                    availableMoves.to[newPlace] = new Move(this.board[newPlace.x][newPlace.y].hexagon, POSITIONS[key].type, affected);
                     hexagon = clone(this.board[newPlace.x][newPlace.y].hexagon);
                     hexagon.color = POSITIONS[key].color;
 
