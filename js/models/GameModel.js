@@ -256,9 +256,8 @@ var GameModel = function(){
         for( var i = 0, count = this.pearls.length; i < count; i++ ){
             if(this.pearls[i].color == player.color){
                 moves = this.getMoves(this.pearls[i]);
-                delete moves.hexagons;
 
-                if (Object.keys(moves).length > 0){
+                if (Object.keys(moves.to).length > 0){
                     has = true;
                     break;
                 }
