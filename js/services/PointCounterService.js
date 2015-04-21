@@ -1,23 +1,23 @@
 'use strict';
 
 var PointCounterService = function(){
+};
 
-    this.count = function(pearls){
-        var points = {}, color;
+PointCounterService.count = function(pearls){
+    var points = {}, color;
 
-        for( var i = 0, count = pearls.length; i < count; i++){
-            color = pearls[i].color[0];
-            if (points[color]){
-                points[color] ++;
-            }
-            else{
-                points[color] = 1;
-            }
+    for( var i = 0, count = pearls.length; i < count; i++){
+        color = pearls[i].color[0];
+        if (points[color]){
+            points[color] ++;
         }
-        return points;
-    };
+        else{
+            points[color] = 1;
+        }
+    }
+    return points;
+};
 
-    this.addPearlsCountToPlayer = function(points, color, count){
-        points[color[0]] += count;
-    };
+PointCounterService.addPearlsCountToPlayer = function(points, color, count){
+    points[color[0]] += count;
 };

@@ -2,7 +2,6 @@
 
 var Game = function(view, model, pageConstructor){
     GameController.call(this, view, model, pageConstructor);
-    this.pointCounterService = new PointCounterService();
     this.points = {};
     this.currentPlayer = this.model.players[0];
     this.availableMoves = {};
@@ -22,7 +21,7 @@ Game.prototype.process = function(){
 
     Object.getPrototypeOf(Game.prototype).process.call(this);
 
-    this.points = this.pointCounterService.count(this.model.pearls);
+    this.points = PointCounterService.count(this.model.pearls);
     this.postMove();
 };
 
@@ -76,7 +75,7 @@ Game.prototype.handlerHexagonClicked = function(hexagon) {
 
     delete this.selectedPearl;
     // подсчитать очки
-    this.points = this.pointCounterService.count(this.model.pearls);
+    this.points = PointCounterService.count(this.model.pearls);
     // проверить на возможность продолжения игры
     this.postMove();
 };
@@ -110,7 +109,7 @@ Game.prototype.whenPlayerHasNoMoves = function(){
         this.postMove();
         return;
     }
-    this.pointCounterService.addPearlsCountToPlayer(this.points, this.currentPlayer.color, this.model.countFreeCells());
+    PointCounterService.addPearlsCountToPlayer(this.points, this.currentPlayer.color, this.model.countFreeCells());
     this.timeoutDraw();
 
     this.pageConstructor.insertGameOver(this.points);

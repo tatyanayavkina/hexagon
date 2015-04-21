@@ -5,8 +5,13 @@ var AlphaBetaSolver = function(depth){
     this.depth = depth;
 };
 AlphaBetaSolver.prototype = new BaseSolver();
-AlphaBetaSolver.prototype.constructor = AplhaBetaSolver;
+AlphaBetaSolver.prototype.constructor = AlphaBetaSolver;
 
 AlphaBetaSolver.prototype.evaluateMoves = function(board, moves, player, alpha, beta, depth){
+    // find enemy
+    var enemyPlayer = - player;
+    // if not any moves
+    if (Object.keys(moves.to).length == 0){
 
+    }
 };
