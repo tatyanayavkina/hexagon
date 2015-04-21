@@ -274,7 +274,7 @@ var GameModel = function(){
     };
 
     this.move = function(selected, newPearl, moveType){
-        var deleted;
+        var deleted = null;
         // add new pearl to board
         this.addPearlToBoard(newPearl);
        // if moveType is "jump", delete selected
@@ -286,5 +286,7 @@ var GameModel = function(){
             // удаляем ее из списка
             delete this.board[deletedPlace.x][deletedPlace.y].pearl;
         }
+
+        return deleted;
     };
 };
