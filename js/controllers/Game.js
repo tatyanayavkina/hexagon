@@ -21,7 +21,7 @@ Game.prototype.process = function(){
 
     Object.getPrototypeOf(Game.prototype).process.call(this);
 
-    this.points = PointCounterService.count(this.model.pearls);
+    this.points = PointCounterService.count(this.model.board);
     this.postMove();
 };
 
@@ -67,15 +67,13 @@ Game.prototype.handlerHexagonClicked = function(hexagon) {
         delete this.model.board[deletedPlace.x][deletedPlace.y].pearl;
     }
 
-    // обновили массив фишек
-    this.model.refreshPearls();
     // отрисовали ход
     this.view.showStep(pearl,this.model.recolorPearls(currentMoving.affected, this.currentPlayer.color), deleted);
     this.changePlayer();
 
     delete this.selectedPearl;
     // подсчитать очки
-    this.points = PointCounterService.count(this.model.pearls);
+    this.points = PointCounterService.count(this.model.board);
     // проверить на возможность продолжения игры
     this.postMove();
 };

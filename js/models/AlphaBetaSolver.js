@@ -13,5 +13,6 @@ AlphaBetaSolver.prototype.evaluateMoves = function(board, moves, player, alpha, 
     // if not any moves
     if (Object.keys(moves.to).length == 0){
 
+        var counts = PointCounterService.count();
     }
 };
