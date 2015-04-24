@@ -55,3 +55,11 @@ function mixArray(array){
 
     return mixedArray;
 }
+
+function objToArray (obj){
+    var arr = [];
+    for(var key in obj){
+        arr.push(obj[key]);
+    }
+    return arr;
+}

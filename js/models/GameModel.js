@@ -157,7 +157,6 @@ var GameModel = function(){
         var hexagon = clone(this.board[place.x][place.y].hexagon);
         hexagon.color = POSITIONS.jump.color;
         availableMoves.hexagons = [hexagon];
-        availableMoves.from = pearl.place;
         availableMoves.to = {};
 
         for(var key in POSITIONS){
@@ -166,7 +165,7 @@ var GameModel = function(){
 
                 if(this.inBoard(newPlace) && !this.hasPearl(newPlace)){
                     affected = this.getAffectedPearls(newPlace, pearl.color);
-                    availableMoves.to[newPlace] = new Move(this.board[newPlace.x][newPlace.y].hexagon, POSITIONS[key].type, affected);
+                    availableMoves.to[newPlace] = new Move(pearl.place, this.board[newPlace.x][newPlace.y].hexagon.place, POSITIONS[key].type, affected);
                     hexagon = clone(this.board[newPlace.x][newPlace.y].hexagon);
                     hexagon.color = POSITIONS[key].color;
 
@@ -289,4 +288,38 @@ var GameModel = function(){
 
         return deleted;
     };
+
+    //return count of pearls with color
+    this.getValue = function(player){
+        var enemyPlayer = this.getEnemy(player);
+        var counts = PointCounterService.count(this.board);
+        var ownCount = counts[player.color[0]];
+        var enemyCount = counts[enemyPlayer.color[0]];
+        return ownCount > 0 ? ownCount - enemyCount : -BIG_VALUE;
+    };
+
+    this.getEnemy = function(player){
+        var ind = this.players.indexOf(player);
+        var copyPlayers = this.players.slice();
+        return copyPlayers.splice(ind,1)[0];
+    };
+
+    this.getPossibleMovesForPlayer = function(player){
+        var pearlMoves, moves = [];
+        for(var i = 0, countI = this.board.length; i < countI; i++ ){
+            for (var j = 0, countJ = this.board[i].length; j < countJ; j++){
+                if(this.board[i][j] && this.board[i][j].pearl && this.board[i][j].pearl.color == player.color[0]){
+                    pearlMoves = this.getMoves(this.board[i][j].pearl);
+                    if(Object.keys(pearlMoves.to).length > 0 ){
+                        moves.concat(objToArray(pearlMoves.to));
+                    }
+                }
+            }
+        }
+
+        return moves;
+    };
+
+
+
 };
