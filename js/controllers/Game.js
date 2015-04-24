@@ -53,6 +53,7 @@ Game.prototype.handlerHexagonClicked = function(hexagon) {
         return;
     }
 
+    //todo: refactor creation of new Pearl
     var pearl = new Pearl(hexagon);
     pearl.color = this.currentPlayer.color;
     // make move

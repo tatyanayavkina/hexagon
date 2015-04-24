@@ -29,9 +29,8 @@ AlphaBetaSolver.prototype.evaluateMoves = function(model, moves, player, alpha, 
 
     alpha = -BIG_VALUE;
     var modelCopy;
-    for(var key in moves.to){
+    for(var i = 0, count = moves.length; i <count; i++){
         modelCopy = clone(model);
-
     }
 
 };
