@@ -19,7 +19,7 @@ BaseSolver.prototype.getBestMove = function(moves){
 
     for(var i = 0, count = moves.length; i <count; i++){
         if(moves[i].value > bestValue){
-            bestValue = moves.to[key].value;
+            bestValue = moves[i].value;
             bests = [];
             bests.push(moves[i]);
         }

@@ -12,7 +12,7 @@ AlphaBetaSolver.prototype.evaluateMoves = function(model, moves, player, alpha, 
 
     var enemyPlayer = model.getEnemy(player);
     // if not any moves
-    if (Object.keys(moves.to).length == 0){
+    if (moves.length == 0){
         var counts = PointCounterService.count(model.board);
         var ownCount = counts[player.color[0]];
         var enemyCount = counts[enemyPlayer.color[0]];
