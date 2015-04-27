@@ -58,16 +58,16 @@ Game.prototype.handlerHexagonClicked = function(hexagon) {
     var move = this.model.move(currentMoving, this.currentPlayer.color);
     // paint move
     this.view.showStep(move.pearl, move.recolored , move.deleted);
-    this.changePlayer();
-
     delete this.selectedPearl;
-    // count scores
-    this.points = PointCounterService.count(this.model.board);
+    this.changePlayer();
     // check if game can be continued
     this.postMove();
 };
 
 Game.prototype.postMove = function(){
+    // count scores
+    this.points = PointCounterService.count(this.model.board);
+
     // no free cells in board
     if(!this.model.countFreeCells()){
         this.pageConstructor.insertGameOver(this.points);
@@ -82,8 +82,12 @@ Game.prototype.postMove = function(){
     this.pageConstructor.insertStatistic(this.currentPlayer.color, this.points, this.computer);
 
     //если играет компьютер нужно, выполнить ход, обновить статистику, сменить игрока, отрисовать ход, -> сделать имитацию клика????
-    if (this.computer && this.currentPlayer.color == this.computer.color){
-        this.computer.makeMove(this.model, this.view);
+    if (this.computer && this.currentPlayer.color == this.computer.color) {
+        var computerMove;
+
+        this.pageConstructor.changeBlockingDivState(true);
+        computerMove = this.computer.findMove(this.model);
+        this.makeComputerMove(computerMove);
     }
 };
 
@@ -115,4 +119,18 @@ Game.prototype.changePlayer = function(){
         index = 0;
     }
     this.currentPlayer = this.model.players[index];
+};
+
+Game.prototype.makeComputerMove = function(computerMove){
+    var self = this;
+    setTimeout(function(){self.view.showMoves(computerMove.hexagons)}, 1000);
+    setTimeout(
+        function(){
+            var move = self.model.move(computerMove.best, self.computer.color);
+            self.view.showStep(move.pearl, move.recolored , move.deleted);
+            self.changePlayer();
+            self.postMove();
+            self.pageConstructor.changeBlockingDivState(false);
+        }, 2000);
+
 };

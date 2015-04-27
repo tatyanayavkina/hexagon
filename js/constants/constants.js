@@ -3,6 +3,7 @@
 var INFO = 'info';
 var STATISTIC = 'game-statistic';
 var GAME_RESULT = 'result';
+var BLOCKING_DIV = 'blocking';
 var BANNER_SELECT_PLAYERS = 'player-banner';
 var RADIO_PLAYERS_COUNT = 'players';
 var COMPUTER = 'computer';

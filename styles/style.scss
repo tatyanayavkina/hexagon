@@ -187,15 +187,13 @@ body {
     }
 }
 
-div#pointer{
-    display: none;
-    position: absolute;
-    top: 5%;
-    right: 10%;
+div#blocking{
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 
-    width: 15px;
-    height: 15px;
-
-    background-image: url('../images/pointer.png');
-    background-size: cover;
+  z-index: 9;
 }

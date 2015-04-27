@@ -118,6 +118,16 @@ var PageConstructor = function(){
         gameOver.innerHTML = this.buildGameOver(count);
 
         document.getElementById('winner-banner').style.display = 'block';
+    };
+
+    this.changeBlockingDivState = function(block){
+        var blockingDiv = document.getElementById(BLOCKING_DIV);
+        if(block){
+            blockingDiv.style.display = 'block';
+        }
+        else{
+            blockingDiv.style.display = 'none';
+        }
     }
 
 };

@@ -10,27 +10,14 @@ var ComputerPlayer = function(color, playersCount){
     }
 };
 
-ComputerPlayer.prototype.makeMove = function(gameModel, view) {
-    var clickedPearl, clickedHexagon;
-    this.lockMouse();
+ComputerPlayer.prototype.findMove = function(gameModel) {
+    var selectedPearl, selectedHexagon, pearlMoves, pearlHexagons;
 
     var bestMove = this.algorithm.getBestMove(gameModel, this);
-    clickedPearl = gameModel.board[bestMove.from.x][bestMove.from.y].pearl;
-    clickedHexagon = bestMove.hexagon;
+    selectedPearl = gameModel.board[bestMove.from.x][bestMove.from.y].pearl;
+    pearlMoves = gameModel.getMoves(selectedPearl);
+    pearlHexagons = pearlMoves.hexagons;
 
-    var self = this;
-    setTimeout(function(){view.simulateClick(clickedPearl.center);}, 1000);
-    setTimeout( function(){view.simulateClick(clickedHexagon.center); self.unlockMouse();}, 2000);
-};
-
-
-ComputerPlayer.prototype.lockMouse = function (){
-   document.getElementsByTagName('html')[0].style.cursor = 'none';
-   document.getElementById('pointer').style.display = 'block';
-};
-
-ComputerPlayer.prototype.unlockMouse = function(){
-    document.getElementsByTagName('html')[0].style.cursor = 'default';
-    document.getElementById('pointer').style.display = 'none';
+    return {best: bestMove, pearl: selectedPearl, hexagons: pearlHexagons};
 };
 
