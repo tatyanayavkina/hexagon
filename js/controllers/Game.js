@@ -53,15 +53,10 @@ Game.prototype.handlerHexagonClicked = function(hexagon) {
         return;
     }
 
-    //todo: refactor creation of new Pearl
-    var pearl = new Pearl(hexagon);
-    pearl.color = this.currentPlayer.color;
     // make move
-    var deleted = this.model.move(this.selectedPearl, pearl, currentMoving.type);
-
+    var move = this.model.move(currentMoving, this.currentPlayer.color);
     // paint move
-    this.view.showStep(pearl,this.model.recolorPearls(currentMoving.affected, this.currentPlayer.color), deleted);
-
+    this.view.showStep(move.pearl,this.model.recolorPearls(currentMoving.affected, this.currentPlayer.color), move.deleted);
     this.changePlayer();
 
     delete this.selectedPearl;
