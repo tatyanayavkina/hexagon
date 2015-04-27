@@ -36,10 +36,8 @@ AlphaBetaSolver.prototype.evaluateMoves = function(model, moves, player, alpha, 
         modelCopy.move(moves[i], player.color);
         var enemyMoves = modelCopy.getPossibleMovesForPlayer(enemyPlayer);
         moves[i].value = -this.evaluateMoves(modelCopy, enemyMoves, enemyPlayer, -score, -alpha, depth - 1);
-        console.log('alpha',alpha);
         if (moves[i].value < score) {score  = moves[i].value;}
         if (score <= alpha) {
-            console.log('this return!!!!!');
             return score;}
     }
 

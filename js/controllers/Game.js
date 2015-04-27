@@ -8,7 +8,7 @@ var Game = function(view, model, pageConstructor){
     this.computer = null;
 
     if (this.model.computerPlays){
-        this.computer = new ComputerPlayer(this.model.players[this.model.players.length - 1].color, new AlphaBetaSolver(2));
+        this.computer = new ComputerPlayer(this.model.players[this.model.players.length - 1].color, this.model.players.length);
         this.model.players[this.model.players.length - 1] = this.computer;
     }
 };
