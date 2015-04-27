@@ -276,6 +276,7 @@ var GameModel = function(){
         var newPearl = new Pearl(moveCell.hexagon);
         newPearl.color = color;
         this.addPearlToBoard(newPearl);
+        var recolored = this.recolorPearls(moveCell.affected, color);
 
         var deleted = null;
         // if moveType is "jump", delete old pearl
@@ -288,7 +289,7 @@ var GameModel = function(){
             delete this.board[deletedPlace.x][deletedPlace.y].pearl;
         }
 
-        return {pearl: newPearl , deleted: deleted};
+        return {pearl: newPearl , recolored: recolored, deleted: deleted};
     };
 
     //return count of pearls with color
@@ -301,19 +302,26 @@ var GameModel = function(){
     };
 
     this.getEnemy = function(player){
-        var ind = this.players.indexOf(player);
-        var copyPlayers = this.players.slice();
-        return copyPlayers.splice(ind,1)[0];
+        for(var i = 0, count = this.players.length; i < count; i++){
+            if( player.color[0] == this.players[i].color[0]){
+                var ind = i + 1;
+                if (ind == count){
+                    ind = 0;
+                }
+            }
+        }
+
+        return this.players[ind];
     };
 
     this.getPossibleMovesForPlayer = function(player){
         var pearlMoves, moves = [];
         for(var i = 0, countI = this.board.length; i < countI; i++ ){
             for (var j = 0, countJ = this.board[i].length; j < countJ; j++){
-                if(this.board[i][j] && this.board[i][j].pearl && this.board[i][j].pearl.color == player.color){
+                if(this.board[i][j] && this.board[i][j].pearl && this.board[i][j].pearl.color[0] == player.color[0]){
                     pearlMoves = this.getMoves(this.board[i][j].pearl);
                     if(Object.keys(pearlMoves.to).length > 0 ){
-                        moves.concat(objToArray(pearlMoves.to));
+                        moves = moves.concat(objToArray(pearlMoves.to));
                     }
                 }
             }

@@ -24,15 +24,26 @@ AlphaBetaSolver.prototype.evaluateMoves = function(model, moves, player, alpha, 
     if (depth == 0){
         Object.getPrototypeOf(AlphaBetaSolver.prototype).evaluateMoves.call(this, model, player, moves);
         var bestMove = Object.getPrototypeOf(AlphaBetaSolver.prototype).getBestMove.call(this, moves);
+
         return bestMove.value;
     }
 
-    alpha = -BIG_VALUE;
+    var score = beta;
     var modelCopy;
+
     for(var i = 0, count = moves.length; i <count; i++){
         modelCopy = clone(model);
+        modelCopy.move(moves[i], player.color);
+        var enemyMoves = modelCopy.getPossibleMovesForPlayer(enemyPlayer);
+        moves[i].value = -this.evaluateMoves(modelCopy, enemyMoves, enemyPlayer, -score, -alpha, depth - 1);
+        console.log('alpha',alpha);
+        if (moves[i].value < score) {score  = moves[i].value;}
+        if (score <= alpha) {
+            console.log('this return!!!!!');
+            return score;}
     }
 
+    return score;
 };
 
 AlphaBetaSolver.prototype.getBestMove = function(model, player){

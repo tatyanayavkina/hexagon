@@ -8,7 +8,8 @@ var Game = function(view, model, pageConstructor){
     this.computer = null;
 
     if (this.model.computerPlays){
-        this.computer = new ComputerPlayer(this.model.players[this.model.players.length - 1].color);
+        this.computer = new ComputerPlayer(this.model.players[this.model.players.length - 1].color, new AlphaBetaSolver(2));
+        this.model.players[this.model.players.length - 1] = this.computer;
     }
 };
 
@@ -56,7 +57,7 @@ Game.prototype.handlerHexagonClicked = function(hexagon) {
     // make move
     var move = this.model.move(currentMoving, this.currentPlayer.color);
     // paint move
-    this.view.showStep(move.pearl,this.model.recolorPearls(currentMoving.affected, this.currentPlayer.color), move.deleted);
+    this.view.showStep(move.pearl, move.recolored , move.deleted);
     this.changePlayer();
 
     delete this.selectedPearl;

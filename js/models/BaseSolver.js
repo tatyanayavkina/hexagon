@@ -32,6 +32,5 @@ BaseSolver.prototype.getBestMove = function(moves){
         var ind = Math.floor(Math.random() * bests.length);
         bestMove = bests[ind];
     }
-
     return bestMove;
 };
