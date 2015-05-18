@@ -1,4 +1,8 @@
 'use strict';
+/*
+    Game - controller, parent - GameController
+    This controller manages the game process
+ */
 
 var Game = function(view, model, pageConstructor){
     GameController.call(this, view, model, pageConstructor);
@@ -29,7 +33,6 @@ Game.prototype.process = function(){
 Game.prototype.handlerPearlClicked = function(pearl) {
 
     if (this.currentPlayer.color != pearl.color) {
-        // можно было бы потенциально противный звук издавать
         return;
     }
 
@@ -81,7 +84,7 @@ Game.prototype.postMove = function(){
     // game continue
     this.pageConstructor.insertStatistic(this.currentPlayer.color, this.points, this.computer);
 
-    //если играет компьютер нужно, выполнить ход, обновить статистику, сменить игрока, отрисовать ход, -> сделать имитацию клика????
+    //if computer plays
     if (this.computer && this.currentPlayer.color == this.computer.color) {
         var computerMove;
 

@@ -1,4 +1,8 @@
 'use strict';
+/*
+    ZoneConstructor - controller, parent - GameController
+    This controller manages game zone construction
+ */
 
 var ZoneConstructor = function(view, model, pageConstructor) {
     GameController.call(this, view, model, pageConstructor);

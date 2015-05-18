@@ -1,7 +1,10 @@
 'use strict';
+/*
+    PearlsConstructor - controller, parent - GameController
+    This controller manages where pearls will be at the start of game
+ */
 
 var PearlsConstructor = function(view, model, pageConstructor) {
-    // вызвать конструктор базового класса, передать view, model
     GameController.call(this, view, model, pageConstructor);
 };
 
@@ -15,12 +18,12 @@ PearlsConstructor.prototype.handlerPearlPartialMoved = function(pearl, point){
 
 PearlsConstructor.prototype.handlerPearlMoved = function(pearl, sourceHexagon, destinationHexagon) {
     if (destinationHexagon == null) {
-        // потенциально можно было бы удалять фишку, но пока просто вернем ее на место
+        // if there is not game zone then return to source hexagon
         this.returnPearl(pearl, sourceHexagon);
         return;
     }
     if (this.model.findPlaceByHexagon(destinationHexagon)) {
-        // если в месте, куда нас перетащили, что-то есть, то верунться на исходное поле
+        // if there is another pearl then return to sourceHexagon
         this.returnPearl(pearl, sourceHexagon);
         return;
     }

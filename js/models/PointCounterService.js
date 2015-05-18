@@ -1,4 +1,8 @@
 'use strict';
+/*
+    PointerCounterService
+    is used to calculate points at the current game step
+ */
 
 var PointCounterService = function(){
 };

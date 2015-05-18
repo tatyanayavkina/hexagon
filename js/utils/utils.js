@@ -1,4 +1,7 @@
 'use strict';
+/*
+need methods
+ */
 
 function addPropertyToObject(obj, properties){
     for(var key in properties){

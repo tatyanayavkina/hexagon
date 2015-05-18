@@ -1,14 +1,18 @@
 'use strict';
+/*
+    AlphaBetaAI provides a strategy of computer in game when players count is only 2
+ */
+
 // use only when 2-players game !!!!!
-var AlphaBetaSolver = function(depth){
-    BaseSolver.call(this);
+var AlphaBetaAI = function(depth){
+    BaseAI.call(this);
     this.depth = depth;
 };
 
-AlphaBetaSolver.prototype = new BaseSolver();
-AlphaBetaSolver.prototype.constructor = AlphaBetaSolver;
+AlphaBetaAI.prototype = new BaseAI();
+AlphaBetaAI.prototype.constructor = AlphaBetaAI;
 
-AlphaBetaSolver.prototype.evaluateMoves = function(model, moves, player, alpha, beta, depth){
+AlphaBetaAI.prototype.evaluateMoves = function(model, moves, player, alpha, beta, depth){
 
     var enemyPlayer = model.getEnemy(player);
     // if not any moves
@@ -22,8 +26,8 @@ AlphaBetaSolver.prototype.evaluateMoves = function(model, moves, player, alpha, 
     }
 
     if (depth == 0){
-        Object.getPrototypeOf(AlphaBetaSolver.prototype).evaluateMoves.call(this, model, player, moves);
-        var bestMove = Object.getPrototypeOf(AlphaBetaSolver.prototype).getBestMove.call(this, moves);
+        Object.getPrototypeOf(AlphaBetaAI.prototype).evaluateMoves.call(this, model, player, moves);
+        var bestMove = Object.getPrototypeOf(AlphaBetaAI.prototype).getBestMove.call(this, moves);
 
         return bestMove.value;
     }
@@ -44,8 +48,8 @@ AlphaBetaSolver.prototype.evaluateMoves = function(model, moves, player, alpha, 
     return score;
 };
 
-AlphaBetaSolver.prototype.getBestMove = function(model, player){
+AlphaBetaAI.prototype.getBestMove = function(model, player){
     var moves = model.getPossibleMovesForPlayer(player);
     this.evaluateMoves(model, moves, player, -BIG_VALUE, BIG_VALUE, this.depth);
-    return Object.getPrototypeOf(AlphaBetaSolver.prototype).getBestMove.call(this, moves);
+    return Object.getPrototypeOf(AlphaBetaAI.prototype).getBestMove.call(this, moves);
 };

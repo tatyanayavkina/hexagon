@@ -1,12 +1,18 @@
 'use strict';
+/*
+    ComputerPlayer represents computer in game
+    has 2 different strategies to find best move
+    one is used when players count is 2, another -
+    when players count is more than 2
+ */
 
 var ComputerPlayer = function(color, playersCount){
     this.color = color;
     if (playersCount == 2){
-        this.algorithm = new AlphaBetaSolver(2);
+        this.algorithm = new AlphaBetaAI(2);
     }
     else{
-        this.algorithm = new SimpleSolver();
+        this.algorithm = new SimpleAI();
     }
 };
 

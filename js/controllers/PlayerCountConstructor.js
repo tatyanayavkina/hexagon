@@ -1,4 +1,8 @@
 'use strict';
+/*
+    PlayersCountConstructor - controller, parent - GameController
+    This controller manages game player count
+ */
 
 var PlayerCounterConstructor = function(view, model, pageConstructor) {
     GameController.call(this, view, model, pageConstructor);

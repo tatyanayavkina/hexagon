@@ -1,4 +1,9 @@
 'use strict';
+/*
+    Base app controller
+    Children: ZoneConstructor, PlayersCountConstructor, PearlsConstructor, Game
+    Provide common handle for user interactions
+ */
 
 var GameController = function(view, model, pageConstructor) {
 
@@ -73,9 +78,6 @@ GameController.prototype.handlerMouseUp = function(point){
         this.index = -1;
     }
 };
-
-// то, что осталось в классе Game разделить и поместить либо сюда, либо в Model
-// в Model лежат Board, Hexagons, Pearls
 
 GameController.prototype.insertPage = function(page){
     var element = document.getElementById(INFO);

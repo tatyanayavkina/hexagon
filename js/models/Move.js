@@ -1,4 +1,8 @@
 'use strict';
+/*
+    Move
+    is a model of available step
+ */
 
 var Move = function(from, hexagon, type, affected){
     this.from = from;

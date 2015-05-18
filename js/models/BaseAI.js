@@ -1,10 +1,14 @@
 'use strict';
+/*
+    BaseAI is a base class for computer strategies
+    provides common used methods
+ */
 
-var BaseSolver = function(){
+var BaseAI = function(){
 
 };
 
-BaseSolver.prototype.evaluateMoves = function(model, player, moves){
+BaseAI.prototype.evaluateMoves = function(model, player, moves){
     var baseValue = model.getValue(player);
 
     for(var i = 0, count = moves.length; i <count; i++){
@@ -12,7 +16,7 @@ BaseSolver.prototype.evaluateMoves = function(model, player, moves){
     }
 };
 
-BaseSolver.prototype.getBestMove = function(moves){
+BaseAI.prototype.getBestMove = function(moves){
     var bestMove = null;
     var bestValue = -BIG_VALUE;
     var bests = [];

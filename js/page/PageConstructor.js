@@ -1,4 +1,7 @@
 'use strict';
+/*
+PageConstructor provides html for all page of the application
+ */
 
 var PageConstructor = function(){
     this.createPageZoneConstructor = function(){

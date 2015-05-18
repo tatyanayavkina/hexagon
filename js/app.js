@@ -1,6 +1,6 @@
 'use strict';
 
-// фабрика для GameController
+//  GameController factory
 var Application = function() {
     this.controller = {};
 

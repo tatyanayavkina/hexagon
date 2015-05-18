@@ -1,4 +1,10 @@
 'use strict';
+/*
+    GameModel
+    is a main model in the game
+    contains info about game board, about players, etc
+    provides methods to get different information about game state at the current step
+ */
 
 var GameModel = function(){
     this.board = [];

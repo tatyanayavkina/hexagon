@@ -1,4 +1,7 @@
 'use strict';
+/*
+    Coordinates
+ */
 
 var Coordinates = function(x,y){
     this.x = x;

@@ -1,14 +1,14 @@
 'use strict';
 
 /*
-* Класс вектор
+* Vector
 */
 var Vector = function(initial, terminal){
     this.coordinates = new Coordinates(terminal.x - initial.x, terminal.y - initial.y);
 };
 
 /*
- * Метод вычисляет векторное произведение двух векторов
+ * This method calculates vector product
  */
 
 Vector.prototype.vectorMultiply = function(vector){

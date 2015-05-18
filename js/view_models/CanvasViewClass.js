@@ -1,4 +1,7 @@
 'use strict';
+/*
+CanvasView manages how user sees game zone at the current step of the game
+ */
 
 var CanvasView = function(){
     this.stadium = new Canvas(CANVAS_ELEMENTS.stadium, CANVAS_COLORS.stadium );
@@ -9,11 +12,11 @@ var CanvasView = function(){
         this.stadium.clear();
 
         for( var i = 0, count = hexagons.length; i < count; i++){
-            //если клетка активна - она закрашенная
+            //if cell is active then it is filled
             if(hexagons[i].active){
                 this.stadium.drawHexagon(hexagons[i], true, true);
             }
-            //если неактивна - то есть только граница
+            //else it is only bounded
             else{
                 this.stadium.drawHexagon(hexagons[i], true, false);
             }
@@ -40,15 +43,15 @@ var CanvasView = function(){
     this.showStep = function(newPearl, recolorPearls, deletedPearl){
         this.selected.clear();
 
-        // рисуем новую жемчужину
+        // draw new pearl
         this.pearls.drawCircle(newPearl);
-        // перекрашиваем старые
+        // recolor old pearls
         if(recolorPearls.length > 0){
             for(var i = 0, count = recolorPearls.length; i < count; i++){
                 this.pearls.drawSectorsTimeout(recolorPearls[i]);
             }
         }
-        // если нужно, убираем жемчужину
+        // delete pearl if it is need
         if (deletedPearl){
             this.pearls.clear(deletedPearl.rectangle.left, deletedPearl.rectangle.width, deletedPearl.rectangle.height);
         }
@@ -88,23 +91,5 @@ var CanvasView = function(){
         }
 
     };
-
-    this.simulateClick = function(point){
-        var left = this.pearls.canvas.getBoundingClientRect().left;
-        var top = this.pearls.canvas.getBoundingClientRect().top;
-        var element = document.elementFromPoint(point.x + left, point.y + top);
-
-        var evt = new MouseEvent('mousedown',{
-            'view': window,
-            'bubbles': true,
-            'cancelable': true,
-            'clientX': point.x + left,
-            'clientY': point.y + top,
-            'screenX': point.x + left,
-            'screenY': point.y + top
-        });
-
-        element.dispatchEvent(evt);
-    }
 
  };

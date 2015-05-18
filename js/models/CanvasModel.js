@@ -1,4 +1,7 @@
 'use strict';
+/*
+    Canvas provides methods to draw on html5 canvas
+ */
 
 var Canvas = function(id, colors){
     this.canvas = document.getElementById(id);
@@ -11,7 +14,7 @@ var Canvas = function(id, colors){
 };
 
 /*
-очищение канвы
+    canvas clear
 */
 Canvas.prototype.clear = function(start, width, height){
     start = start || new Coordinates(0,0);
@@ -21,7 +24,7 @@ Canvas.prototype.clear = function(start, width, height){
     this.context.clearRect(start.x, start.y, width, height);
 };
 
-/* накладывает градиент, если задано */
+/* make gradient fill when it is need */
 Canvas.prototype.setGradientFillStyle = function(color, rectangle){
     var gradient;
 
@@ -35,7 +38,7 @@ Canvas.prototype.setGradientFillStyle = function(color, rectangle){
 };
 
 /*
-рисование шестиугольника
+draw hexagon
  */
 Canvas.prototype.drawHexagon = function(hexagon, stroken, filled){
     var points = hexagon.vertexes;
@@ -61,7 +64,8 @@ Canvas.prototype.drawHexagon = function(hexagon, stroken, filled){
 };
 
 /*
-рисование круга с центром center и радиуса radius цвета color
+draw circle with center and radius and color
+
 */
 Canvas.prototype.drawCircle = function(pearl){
   var rectangle = new Rectangle(pearl.center.x - pearl.radius, pearl.center.y - pearl.radius, pearl.center.x + pearl.radius, pearl.center.y + pearl.radius);
@@ -69,7 +73,7 @@ Canvas.prototype.drawCircle = function(pearl){
 };
 
 /*
-    рисование сектора
+    draw circle sector
 */
 Canvas.prototype.drawSectorsTimeout = function(pearl){
     var startAngle = ANGLES[0];

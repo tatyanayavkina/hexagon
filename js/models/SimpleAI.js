@@ -1,15 +1,19 @@
 'use strict';
-// use only when 2-players game !!!!!
-var SimpleSolver = function(){
-    BaseSolver.call(this);
+
+/*
+    SimpleAI provides a strategy of computer in game when players count is more than 2
+ */
+
+var SimpleAI = function(){
+    BaseAI.call(this);
 };
 
-SimpleSolver.prototype = new BaseSolver();
-SimpleSolver.prototype.constructor = SimpleSolver;
+SimpleAI.prototype = new BaseAI();
+SimpleAI.prototype.constructor = SimpleAI;
 
 
-SimpleSolver.prototype.getBestMove = function(model, player){
+SimpleAI.prototype.getBestMove = function(model, player){
     var moves = model.getPossibleMovesForPlayer(player);
-    Object.getPrototypeOf(SimpleSolver.prototype).evaluateMoves.call(this, model, player, moves);
-    return Object.getPrototypeOf(SimpleSolver.prototype).getBestMove.call(this, moves);
+    Object.getPrototypeOf(SimpleAI.prototype).evaluateMoves.call(this, model, player, moves);
+    return Object.getPrototypeOf(SimpleAI.prototype).getBestMove.call(this, moves);
 };

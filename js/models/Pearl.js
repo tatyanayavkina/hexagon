@@ -1,5 +1,10 @@
 'use strict';
 
+/*
+    Pearl
+    is model of player-piece
+ */
+
 var Pearl = function(hexagon){
     this.center = new Coordinates(-1,-1);
     this.place = new Coordinates(-1,-1);
