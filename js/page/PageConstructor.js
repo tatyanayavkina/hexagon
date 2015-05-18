@@ -4,12 +4,12 @@ var PageConstructor = function(){
     this.createPageZoneConstructor = function(){
         var html ='';
 
-        html += '<div class="game-table-info-title">Настройка игры</div>' +
+        html += '<div class="game-table-info-title">' + GameSettings[locale] + '</div>' +
                 '<div>' +
-                    'Выберите клетки поля, которые будут игровыми. (Закрашенные клетки являются игровыми).' +
+                    ChoosePlayingCells[locale] +
                 '</div>';
 
-        html += '<div class="button-a-wrapper"><a class="button-a" href="'+ HASH_URI.count+'">Выбрать количество игроков</a></div>';
+        html += '<div class="button-a-wrapper"><a class="button-a" href="'+ HASH_URI.count+'">'+ ChoosePlayersCount[locale] +'</a></div>';
 
         return html;
     };
@@ -17,9 +17,9 @@ var PageConstructor = function(){
     this.createPagePlayersCountConstructor = function(){
         var html ='';
 
-        html +='<div class="game-table-info-title">Выбрать количество игроков</div>' +
+        html +='<div class="game-table-info-title">' + ChoosePlayersCount[locale] +'</div>' +
                 '<div>' +
-                'По умолчанию число игроков равно 2-м' +
+                    DefaultPlayersCount[locale] +
                 '</div>' +
                 '<div class="game-table-info-radio">';
 
@@ -29,19 +29,19 @@ var PageConstructor = function(){
         }
 
         html += '</div>' +
-                '<div><input class="checkbox" id="computer" type="checkbox"><label class="radio-label">Игра с компьютером</label></div>' +
-                '<div class="button-a-wrapper"><a class="button-a" href="'+ HASH_URI.pearls+'">Расставить фишки</a></div>';
+                '<div><input class="checkbox" id="computer" type="checkbox"><label class="radio-label">'+ ComputerPlays[locale] +'</label></div>' +
+                '<div class="button-a-wrapper"><a class="button-a" href="'+ HASH_URI.pearls+'">' + PlacePearls[locale] +'</a></div>';
 
         return html;
     };
 
     this.createPagePlayersConstructor = function(){
         var html = '';
-        html += '<div class="game-table-info-title">Настройка игры</div>' +
+        html += '<div class="game-table-info-title">' + GameSettings[locale] + '</div>' +
                 '<div>' +
-                    'Расставьте фишки на игровом поле. (Фишки переносятся мышью).' +
+                    PlacePearlsDescription[locale] +
                 '</div>' +
-                '<div class="button-a-wrapper"><a class="button-a" href="'+ HASH_URI.game+'">Начать игру</a></div>';
+                '<div class="button-a-wrapper"><a class="button-a" href="'+ HASH_URI.game+'">' + StartGame[locale] +'</a></div>';
 
         return html;
 
@@ -50,16 +50,16 @@ var PageConstructor = function(){
     this.createPageGamePlay = function(){
         var html = '';
 
-        html += '<div class="game-table-info-title">Игра</div>' +
+        html += '<div class="game-table-info-title">' + Game[locale] +'</div>' +
                 '<div id="game-statistic" class="game-statistic">' +
                 '</div>';
 
 
         html += '<div id="winner-banner" class="banner">' +
                     '<div class="banner-inner">' +
-                        '<div>Игра завершена</div>' +
+                        '<div>' + EndGame[locale] +'</div>' +
                         '<div id="result"></div>' +
-                        '<div class="button-a-wrapper"><a class="button-a" href="./">Новая игра</a></div>' +
+                        '<div class="button-a-wrapper"><a class="button-a" href="./">'+ NewGame[locale] +'</a></div>' +
                     '</div>' +
                 '</div>';
 
@@ -73,7 +73,7 @@ var PageConstructor = function(){
 
     this.buildStatistic = function(player, count, computer){
         var width = 100/Object.keys(count).length;
-        var html = '<div class="current-player" style="background-color: '+ player[0] +'">Сейчас ходят</div>';
+        var html = '<div class="current-player" style="background-color: '+ player[0] +'">'+ CurrentPlayer[locale] +'</div>';
 
         html += '<div class="wrapper">';
         for(var key in count){
@@ -83,7 +83,7 @@ var PageConstructor = function(){
         html += '</div>';
 
         if(computer){
-            html += '<div class="current-player" style="background-color: '+ computer.color[0] +'">Компьютер</div>';
+            html += '<div class="current-player" style="background-color: '+ computer.color[0] +'">' + Computer[locale] +'</div>';
         }
 
         return html;

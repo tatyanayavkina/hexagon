@@ -1,5 +1,11 @@
 'use strict';
-// id-ки элементов
+//localization
+var Localization = {
+    en: 'en',
+    ru: 'ru'
+};
+
+// html elements ids
 var INFO = 'info';
 var STATISTIC = 'game-statistic';
 var GAME_RESULT = 'result';
@@ -8,7 +14,7 @@ var BANNER_SELECT_PLAYERS = 'player-banner';
 var RADIO_PLAYERS_COUNT = 'players';
 var COMPUTER = 'computer';
 
-// адреса для страниц
+// page hash uri
 var HASH_URI = {
     zone    : '#construct-zone',
     count   : '#construct-players-count',
@@ -16,12 +22,12 @@ var HASH_URI = {
     game    : '#play'
 };
 
-//точка, от которой рисуется самый первый шестиугольник
+//start point for the first hexagon vertex
 var START_POINT = new Coordinates(100, 0);
-// размер стороны шестиугольника
+// hexagon side length
 var SIZE = 35;
 
-// настройки цветов для рисования
+// color settings for canvas
 var CANVAS_COLORS ={
   stadium:{
       strokeStyle: "rgba(235, 10, 254, 0.5)",
@@ -30,7 +36,7 @@ var CANVAS_COLORS ={
 };
 
 
-// id тегов с canvas
+// canvas html elements ids
 var CANVAS_ELEMENTS ={
   stadium : 'stadium',
   selected: 'selected',
@@ -44,11 +50,11 @@ var CANVAS_EVENTS = {
   mouseclick: 'onmouseclick'
 };
 
-// размер игрового поля
+// playground size
 var GAME_SIZE = 11;
-//массив, показывающий, сколько шестиугольников в каждом ряду
+//array - how much hexagons in each row
 var HEXAGON_ROW_COUNT = [7,8,9,10,11,10,9,8,7];
-//сдвиг при добавлении шестиугольников в игровую доску
+//array - translation of hexagons in each row
 var MATRIX_TRANSLATION = [0,0,0,0,0,1,2,3,4];
 
 var COLORS ={
@@ -56,7 +62,7 @@ var COLORS ={
    BLUE : 'blue',
    WHITE: 'white'
 } ;
-//Информация о стартовом количестве фишек и их цвете
+//start info about players' colors and pearls count
 var PLAYERS_CONFIG = [
     // RED
     {count: 3, color: ["rgb(255, 87, 66)", "rgb(191, 0, 50)"], description: COLORS.RED},
@@ -72,7 +78,7 @@ var ANGLES = [0, Math.PI/6, Math.PI/3, Math.PI/2, 2*Math.PI/3, 5*Math.PI/6, Math
 
 var POSITIONS = {
   copy:{
-      // позиции, на которые можно размножиться
+      // copy positions
       positions:  [
           new Coordinates(-1, 0),
           new Coordinates(-1, -1),
@@ -87,7 +93,7 @@ var POSITIONS = {
   },
 
   jump: {
-      // позиции, на которые можно прыгнуть
+      // jump positions
       positions:  [
           new Coordinates(-2, -1),
           new Coordinates(-2, -2),
